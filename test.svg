@@ -1,0 +1,29 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cabeza del panda -->
+  <circle cx="100" cy="100" r="80" fill="#fff" stroke="#000" stroke-width="3"/>
+  
+  <!-- Orejas -->
+  <circle cx="40" cy="40" r="20" fill="#000"/>
+  <circle cx="160" cy="40" r="20" fill="#000"/>
+  
+  <!-- Ojos (manchas) -->
+  <ellipse cx="70" cy="80" rx="20" ry="25" fill="#000"/>
+  <ellipse cx="130" cy="80" rx="20" ry="25" fill="#000"/>
+  
+  <!-- Pupilas -->
+  <circle cx="70" cy="80" r="10" fill="#fff"/>
+  <circle cx="130" cy="80" r="10" fill="#fff"/>
+  
+  <!-- Mejillas -->
+  <circle cx="70" cy="115" r="8" fill="#f4a1a1" opacity="0.6"/>
+  <circle cx="130" cy="115" r="8" fill="#f4a1a1" opacity="0.6"/>
+  
+  <!-- Nariz -->
+  <ellipse cx="100" cy="110" rx="10" ry="6" fill="#000"/>
+  
+  <!-- Boca sonriente 
+  <path d="M85,125 Q100,140 115,125" stroke="#000" stroke-width="2" fill="none"/>
+  -->
+  <!-- Sombra ligera en la cabeza -->
+  <ellipse cx="100" cy="110" rx="60" ry="20" fill="#000" opacity="0.05"/>
+</svg>
