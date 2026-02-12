@@ -1,33 +1,30 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Formulario IA para OPN</title>
+  <title>OPN Docs | Prompt IA</title>
+  <meta name="description" content="Plantilla de prompt para usar OPN con asistentes IA." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main>
-    <header class="hero">
-      <div class="pill">IA</div>
-      <div class="pill">Prompt</div>
-      <h1>Formulario/Prompt para entrenar una IA en OPN</h1>
-      <p>Plantilla profesional para que cualquier IA pueda ensenar OPN con calidad.</p>
-      <nav class="top">
-        <a href="index.html">Inicio</a>
-        <a href="quickstart.html">Inicio rapido</a>
-        <a href="syntax.html">Sintaxis</a>
-        <a href="performance.html">Rendimiento</a>
-      </nav>
-    </header>
+  <div class="site-shell">
+    <header class="topbar"><div class="container topbar-inner">
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Plantilla IA</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a></nav>
+    </div></header>
 
-    <section class="callout">
-      <h2>Instrucciones</h2>
-      <p>Copia este prompt y pegalo en la IA que quieras usar.</p>
-      <textarea readonly style="width:100%; min-height:360px;">Eres un asistente experto en el lenguaje OPN.
+    <main class="page-main"><div class="container">
+      <section class="hero"><article class="panel hero-panel"><span class="kicker">IA workflow</span><h1 class="page-title" data-i18n="title">Formulario de prompt para asistentes IA</h1><p class="page-intro" data-i18n="intro">Copia este prompt y ajusta nivel + tema para que una IA te ensene OPN.</p></article></section>
+
+      <section class="section card reveal">
+        <h2 data-i18n="prompt_title">Prompt listo para copiar</h2>
+        <pre id="ai-prompt"><code>Eres un asistente experto en el lenguaje OPN.
 
 Objetivo:
-- Enseñarme a programar en OPN desde nivel [principiante/intermedio/avanzado].
+- Ensenarme a programar en OPN desde nivel [principiante/intermedio/avanzado].
 
 Contexto del lenguaje:
 - OPN soporta: var, function, class, if, else, while, for, return, true, false, null, this, import, from, as.
@@ -36,21 +33,32 @@ Contexto del lenguaje:
 
 Reglas de respuesta:
 1) Explica cada concepto con ejemplos en OPN.
-2) Siempre incluye una version corregida si mi codigo tiene errores.
+2) Incluye version corregida si mi codigo tiene errores.
 3) Muestra comparacion corta OPN vs Python cuando ayude.
 4) Usa pasos concretos, sin teoria innecesaria.
-5) Si falta contexto, hazme maximo 3 preguntas.
+5) Si falta contexto, haz maximo 3 preguntas.</code></pre>
+        <button class="btn-copy" data-copy-target="#ai-prompt" data-i18n="copy_prompt">Copiar prompt</button>
+      </section>
+    </div></main>
 
-Formato:
-- Resumen corto
-- Ejemplo OPN
-- Errores comunes
-- Mini ejercicio
-- Solucion del ejercicio
+    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/ia_formulario.md.</div></footer>
+  </div>
 
-Primer tema:
-[ESCRIBE AQUI EL TEMA]</textarea>
-    </section>
-  </main>
+  <script>
+    window.OPN_I18N = {
+      es: {
+        brand_subtitle: 'Plantilla IA', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
+        title: 'Formulario de prompt para asistentes IA', intro: 'Copia este prompt y ajusta nivel + tema para que una IA te ensene OPN.', prompt_title: 'Prompt listo para copiar',
+        copy_prompt: 'Copiar prompt', footer: 'Fuente: docs/ia_formulario.md.', copied: 'Copiado', copy_error: 'Error'
+      },
+      en: {
+        brand_subtitle: 'AI template', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
+        title: 'Prompt form for AI assistants', intro: 'Copy this prompt and set level + topic so an AI can teach you OPN.', prompt_title: 'Prompt ready to copy',
+        copy_prompt: 'Copy prompt', footer: 'Source: docs/ia_formulario.md.', copied: 'Copied', copy_error: 'Error'
+      }
+    };
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/docs.js"></script>
 </body>
 </html>

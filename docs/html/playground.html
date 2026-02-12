@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OPN Docs | Playground</title>
+  <meta name="description" content="Editor y consola web para pruebas basicas de OPN." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar"><div class="container topbar-inner">
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Playground web</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a></nav>
+    </div></header>
+
+    <main class="page-main"><div class="container">
+      <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Laboratorio</span><h1 class="page-title" data-i18n="title">Editor + consola para pruebas basicas de OPN</h1><p class="page-intro" data-i18n="intro">Este playground ejecuta un subconjunto basico de OPN en el navegador para practicar rapido.</p></article></section>
+
+      <section class="section">
+        <div class="play-grid reveal">
+          <article class="editor-shell">
+            <div class="editor-head"><strong data-i18n="editor">Editor</strong><div class="editor-actions"><button class="btn-ghost" id="play-sample" data-i18n="sample">Cambiar ejemplo</button><button class="btn-ghost" id="play-run" data-i18n="run">Ejecutar</button></div></div>
+            <textarea id="play-editor" class="play-textarea" spellcheck="false"></textarea>
+          </article>
+          <article>
+            <div class="editor-head"><strong data-i18n="console">Consola</strong><div class="editor-actions"><button class="btn-ghost" id="play-clear" data-i18n="clear">Limpiar</button></div></div>
+            <div id="play-console" class="console"></div>
+            <p class="small-muted" data-i18n="note">Soporta pruebas basicas: var, print, for, if y funciones simples.</p>
+          </article>
+        </div>
+      </section>
+    </div></main>
+
+    <footer class="footer"><div class="container" data-i18n="footer">Playground web para experimentacion local.</div></footer>
+  </div>
+
+  <script>
+    window.OPN_I18N = {
+      es: {
+        brand_subtitle: 'Playground web', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
+        kicker: 'Laboratorio', title: 'Editor + consola para pruebas basicas de OPN', intro: 'Este playground ejecuta un subconjunto basico de OPN en el navegador para practicar rapido.',
+        editor: 'Editor', sample: 'Cambiar ejemplo', run: 'Ejecutar', console: 'Consola', clear: 'Limpiar', note: 'Soporta pruebas basicas: var, print, for, if y funciones simples.', footer: 'Playground web para experimentacion local.',
+        copied: 'Copiado', copy_error: 'Error'
+      },
+      en: {
+        brand_subtitle: 'Web playground', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
+        kicker: 'Lab', title: 'Editor + console for basic OPN tests', intro: 'This playground runs a basic subset of OPN in the browser for fast practice.',
+        editor: 'Editor', sample: 'Change sample', run: 'Run', console: 'Console', clear: 'Clear', note: 'Supports basic testing: var, print, for, if and simple functions.', footer: 'Web playground for local experimentation.',
+        copied: 'Copied', copy_error: 'Error'
+      }
+    };
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/docs.js"></script>
+  <script src="js/playground.js"></script>
+</body>
+</html>

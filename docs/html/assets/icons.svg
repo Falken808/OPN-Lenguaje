@@ -1,0 +1,137 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="OPN docs icon">
+
+  <defs>
+    <!-- Fondo moderno -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A5BFF"/>
+      <stop offset="100%" stop-color="#00C6A2"/>
+    </linearGradient>
+
+    <!-- Portada libro -->
+    <linearGradient id="cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E4ECFF"/>
+    </linearGradient>
+
+    <!-- Lomo libro -->
+    <linearGradient id="spine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4DEFF"/>
+      <stop offset="100%" stop-color="#B8C6FF"/>
+    </linearGradient>
+
+    <!-- Sombra páginas -->
+    <linearGradient id="pages" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F5F7FF"/>
+      <stop offset="100%" stop-color="#E0E6F8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="url(#bg)"/>
+
+  <!-- Sombra suave -->
+  <ellipse cx="260" cy="380" rx="130" ry="32" fill="rgba(0,0,0,0.10)"/>
+
+  <!-- Libro base (cuerpo) -->
+  <path
+    d="
+      M150 180
+      C150 165 162 152 178 150
+      L300 135
+      C320 133 338 147 340 167
+      L355 330
+      C357 350 344 368 324 370
+      L202 385
+      C182 387 164 373 162 353
+      Z"
+    fill="url(#cover)"
+    stroke="#1C2C7A"
+    stroke-width="16"
+    stroke-linejoin="round"
+  />
+
+  <!-- Lomo del libro -->
+  <path
+    d="
+      M150 180
+      L190 175
+      L210 360
+      L170 365
+      C160 366 150 358 148 347
+      L135 215
+      C133 200 140 185 150 180
+      Z"
+    fill="url(#spine)"
+    stroke="#1C2C7A"
+    stroke-width="16"
+    stroke-linejoin="round"
+  />
+
+  <!-- Páginas internas -->
+  <path
+    d="
+      M205 190
+      L310 178
+      L325 330
+      L220 342
+      Z"
+    fill="url(#pages)"
+    stroke="#C5D0F5"
+    stroke-width="8"
+    stroke-linejoin="round"
+  />
+
+  <!-- Líneas de texto (simbolizan documentación) -->
+  <path
+    d="M220 210 L305 200"
+    stroke="#9AA7E8"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+  <path
+    d="M223 235 L300 226"
+    stroke="#9AA7E8"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+  <path
+    d="M226 260 L295 252"
+    stroke="#9AA7E8"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+  <path
+    d="M229 285 L290 278"
+    stroke="#9AA7E8"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+
+  <!-- Marca OPN en el lomo -->
+  <text
+    x="176"
+    y="260"
+    transform="rotate(-8 176 260)"
+    text-anchor="middle"
+    font-size="32"
+    font-weight="700"
+    font-family="Inter, system-ui, sans-serif"
+    letter-spacing="4"
+    fill="#1C2C7A">
+    OPN
+  </text>
+
+  <!-- Texto superior OPN (coherente con el icono del pato) -->
+  <text
+    x="256"
+    y="120"
+    text-anchor="middle"
+    font-size="64"
+    font-weight="700"
+    font-family="Inter, system-ui, sans-serif"
+    letter-spacing="10"
+    fill="#FFFFFF">
+    DOCS
+  </text>
+
+</svg>

@@ -1,0 +1,27 @@
+﻿:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-soft: #eef3fb;
+  --ink: #182034;
+  --ink-soft: #4c5972;
+  --line: #d4dded;
+  --brand: #0057d8;
+  --brand-strong: #003f9f;
+  --accent: #0f8f70;
+  --danger: #b64545;
+  --warning: #d0902f;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 8px 20px rgba(17, 34, 68, 0.08);
+  --shadow-md: 0 16px 40px rgba(17, 34, 68, 0.12);
+
+  --max: 1180px;
+  --header-height: 80px;
+
+  --font-ui: "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-title: "Arial Black", "Segoe UI", sans-serif;
+  --font-mono: "Cascadia Code", "Consolas", monospace;
+}

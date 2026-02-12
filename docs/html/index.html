@@ -1,64 +1,222 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Documentacion OPN</title>
+  <title>OPN Docs | Portal</title>
+  <meta name="description" content="Portal web de documentacion de OPN con guia, sintaxis, CLI, rendimiento y playground." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <main>
-    <header class="hero">
-      <div class="pill">OPN Language</div>
-      <div class="pill">Docs</div>
-      <h1>Documentacion oficial de OPN</h1>
-      <p>Un lenguaje simple, legible y rapido para aprender, prototipar y ejecutar sobre Python.</p>
-      <nav class="top">
-        <a href="quickstart.html">Inicio rapido</a>
-        <a href="syntax.html">Sintaxis</a>
-        <a href="performance.html">Rendimiento</a>
-        <a href="ia-form.html">Formulario IA</a>
-      </nav>
+<body data-page="docs-home">
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="index.html" aria-label="OPN docs">
+          <img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" />
+          <div>
+            <p class="brand-title">OPN Docs</p>
+            <p class="brand-subtitle" data-i18n="brand_subtitle">Documentacion oficial de la plataforma</p>
+          </div>
+        </a>
+
+        <div class="topbar-actions">
+          <div class="lang-toggle" aria-label="Language switcher">
+            <button type="button" data-lang-switch="es">ES</button>
+            <button type="button" data-lang-switch="en">EN</button>
+          </div>
+          <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button>
+        </div>
+
+        <nav id="main-nav" class="nav" data-main-nav>
+          <a href="index.html" data-i18n="nav_home">Inicio</a>
+          <a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a>
+          <a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a>
+          <a href="performance.html" data-i18n="nav_perf">Rendimiento</a>
+          <a href="cli.html">CLI</a>
+          <a href="playground.html" data-i18n="nav_playground">Playground</a>
+          <a href="ia-form.html">IA</a>
+        </nav>
+      </div>
     </header>
 
-    <section class="callout">
-      <h2>Por que OPN</h2>
-      <p>OPN prioriza claridad, errores utiles y una curva de aprendizaje corta. La ejecucion es inmediata y el codigo se transpila a Python para integrarse con herramientas existentes.</p>
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="panel hero-panel float-in">
+          <span class="kicker"><span class="pulse-dot" aria-hidden="true"></span> <span data-i18n="kicker">Plataforma activa</span></span>
+          <h1 class="page-title" data-i18n="hero_title">Web completa para aprender y usar OPN de punta a punta</h1>
+          <p class="page-intro" data-i18n="hero_intro">Este portal convierte los archivos Markdown en una experiencia visual moderna con rutas de aprendizaje, snippets y herramientas practicas.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>7</strong><span data-i18n="stat_pages">Paginas principales</span></div>
+            <div class="stat"><strong>+30</strong><span data-i18n="stat_blocks">Bloques de codigo</span></div>
+            <div class="stat"><strong>100%</strong><span data-i18n="stat_mobile">Navegacion responsive</span></div>
+          </div>
+        </article>
+
+        <aside class="panel reveal">
+          <div class="icon-title">
+            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-book"></use></svg>
+            <h2 data-i18n="routes_title">Rutas recomendadas</h2>
+          </div>
+          <ul class="list-clean">
+            <li data-i18n="route_1" data-i18n-html="1">Empieza por <a href="quickstart.html">Quickstart</a> en 5 minutos.</li>
+            <li data-i18n="route_2" data-i18n-html="1">Consulta la <a href="syntax.html">referencia de sintaxis</a>.</li>
+            <li data-i18n="route_3" data-i18n-html="1">Domina comandos en <a href="cli.html">CLI</a>.</li>
+            <li data-i18n="route_4" data-i18n-html="1">Optimiza en <a href="performance.html">rendimiento</a>.</li>
+            <li data-i18n="route_5" data-i18n-html="1">Prueba codigo en <a href="playground.html">playground</a>.</li>
+          </ul>
+        </aside>
+      </div>
     </section>
 
-    <div class="grid">
-      <div class="card">
-        <h3>Inicio rapido</h3>
-        <p>Instalacion cero. Ejecuta archivos .opn con un solo comando.</p>
-        <p><a href="quickstart.html">Ir a inicio rapido</a></p>
-      </div>
-      <div class="card">
-        <h3>Sintaxis</h3>
-        <p>Variables, funciones, clases, control de flujo y colecciones.</p>
-        <p><a href="syntax.html">Ver sintaxis</a></p>
-      </div>
-      <div class="card">
-        <h3>Rendimiento</h3>
-        <p>Cache LRU de compilacion y buenas practicas para velocidad.</p>
-        <p><a href="performance.html">Ver rendimiento</a></p>
-      </div>
-      <div class="card">
-        <h3>Formulario IA</h3>
-        <p>Prompt profesional para que cualquier IA aprenda y ensene OPN.</p>
-        <p><a href="ia-form.html">Abrir formulario</a></p>
-      </div>
-    </div>
+    <main class="page-main">
+      <div class="container">
+        <section class="section section-grid grid-3">
+          <article class="card hover-lift reveal">
+            <div class="icon-title"><svg class="icon"><use href="assets/icons.svg#i-play"></use></svg><h3 data-i18n="card_q_title">Inicio rapido</h3></div>
+            <p data-i18n="card_q_desc">Ejecuta tu primer archivo .opn y aprende base del lenguaje.</p>
+            <p><a href="quickstart.html" data-i18n="open_guide">Abrir guia</a></p>
+          </article>
 
-    <section>
-      <h2>Ejemplo minimo</h2>
-      <pre>var total = 0;
-for (var i = 0; i &lt; 5; i = i + 1) {
-    total = total + i;
+          <article class="card hover-lift reveal">
+            <div class="icon-title"><svg class="icon"><use href="assets/icons.svg#i-code"></use></svg><h3 data-i18n="card_s_title">Sintaxis completa</h3></div>
+            <p data-i18n="card_s_desc">Comentarios, operadores, funciones, clases, arrays y mapas.</p>
+            <p><a href="syntax.html" data-i18n="see_syntax">Ver sintaxis</a></p>
+          </article>
+
+          <article class="card hover-lift reveal">
+            <div class="icon-title"><svg class="icon"><use href="assets/icons.svg#i-speed"></use></svg><h3 data-i18n="card_p_title">Rendimiento</h3></div>
+            <p data-i18n="card_p_desc">Cache LRU y practicas para ejecuciones rapidas y estables.</p>
+            <p><a href="performance.html" data-i18n="optimize_now">Optimizar ahora</a></p>
+          </article>
+        </section>
+
+        <section class="section section-grid grid-2">
+          <article class="card reveal">
+            <div class="icon-title"><svg class="icon"><use href="assets/icons.svg#i-cli"></use></svg><h3 data-i18n="card_cli_title">Comandos CLI</h3></div>
+            <p data-i18n="card_cli_desc">run, check, compile, stats, debug, repl y watch con ejemplos.</p>
+            <p><a href="cli.html" data-i18n="go_cli">Ir a CLI</a></p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon-title"><svg class="icon"><use href="assets/icons.svg#i-code"></use></svg><h3 data-i18n="card_play_title">Playground</h3></div>
+            <p data-i18n="card_play_desc">Editor + consola para pruebas basicas directas en el navegador.</p>
+            <p><a href="playground.html" data-i18n="open_playground">Abrir playground</a></p>
+          </article>
+        </section>
+
+        <section class="section card reveal">
+          <h2 data-i18n="example_title">Ejemplo base OPN</h2>
+          <p class="page-intro" data-i18n="example_intro">Snippet para validar variables, funciones y salida.</p>
+          <p class="code-block-title">hola.opn</p>
+          <pre id="home-code"><code>var nombre = "OPN";
+var version = 1.0;
+
+function saludar(persona) {
+    return "Hola, " + persona + "!";
 }
-print(total);</pre>
-    </section>
 
-    <div class="footer">OPN Docs. Version inicial de documentacion profesional.</div>
-  </main>
+print(saludar(nombre));
+print("Version: " + version);</code></pre>
+          <button class="btn-copy" data-copy-target="#home-code" data-i18n="copy_snippet">Copiar snippet</button>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container" data-i18n="footer_note">OPN Docs Web. Fuente: README.md y docs/*.md.</div>
+    </footer>
+  </div>
+
+  <script>
+    window.OPN_I18N = {
+      es: {
+        brand_subtitle: 'Documentacion oficial de la plataforma',
+        menu_btn: 'Menu',
+        nav_home: 'Inicio',
+        nav_quickstart: 'Quickstart',
+        nav_syntax: 'Sintaxis',
+        nav_perf: 'Rendimiento',
+        nav_playground: 'Playground',
+        kicker: 'Plataforma activa',
+        hero_title: 'Web completa para aprender y usar OPN de punta a punta',
+        hero_intro: 'Este portal convierte los archivos Markdown en una experiencia visual moderna con rutas de aprendizaje, snippets y herramientas practicas.',
+        stat_pages: 'Paginas principales',
+        stat_blocks: 'Bloques de codigo',
+        stat_mobile: 'Navegacion responsive',
+        routes_title: 'Rutas recomendadas',
+        route_1: 'Empieza por <a href="quickstart.html">Quickstart</a> en 5 minutos.',
+        route_2: 'Consulta la <a href="syntax.html">referencia de sintaxis</a>.',
+        route_3: 'Domina comandos en <a href="cli.html">CLI</a>.',
+        route_4: 'Optimiza en <a href="performance.html">rendimiento</a>.',
+        route_5: 'Prueba codigo en <a href="playground.html">playground</a>.',
+        card_q_title: 'Inicio rapido',
+        card_q_desc: 'Ejecuta tu primer archivo .opn y aprende base del lenguaje.',
+        open_guide: 'Abrir guia',
+        card_s_title: 'Sintaxis completa',
+        card_s_desc: 'Comentarios, operadores, funciones, clases, arrays y mapas.',
+        see_syntax: 'Ver sintaxis',
+        card_p_title: 'Rendimiento',
+        card_p_desc: 'Cache LRU y practicas para ejecuciones rapidas y estables.',
+        optimize_now: 'Optimizar ahora',
+        card_cli_title: 'Comandos CLI',
+        card_cli_desc: 'run, check, compile, stats, debug, repl y watch con ejemplos.',
+        go_cli: 'Ir a CLI',
+        card_play_title: 'Playground',
+        card_play_desc: 'Editor + consola para pruebas basicas directas en el navegador.',
+        open_playground: 'Abrir playground',
+        example_title: 'Ejemplo base OPN',
+        example_intro: 'Snippet para validar variables, funciones y salida.',
+        copy_snippet: 'Copiar snippet',
+        footer_note: 'OPN Docs Web. Fuente: README.md y docs/*.md.',
+        copied: 'Copiado',
+        copy_error: 'Error'
+      },
+      en: {
+        brand_subtitle: 'Official platform documentation',
+        menu_btn: 'Menu',
+        nav_home: 'Home',
+        nav_quickstart: 'Quickstart',
+        nav_syntax: 'Syntax',
+        nav_perf: 'Performance',
+        nav_playground: 'Playground',
+        kicker: 'Live platform',
+        hero_title: 'Complete web docs to learn and use OPN end to end',
+        hero_intro: 'This portal turns Markdown files into a modern visual experience with learning paths, snippets and practical tooling.',
+        stat_pages: 'Main pages',
+        stat_blocks: 'Code blocks',
+        stat_mobile: 'Responsive navigation',
+        routes_title: 'Recommended paths',
+        route_1: 'Start with <a href="quickstart.html">Quickstart</a> in 5 minutes.',
+        route_2: 'Check the <a href="syntax.html">syntax reference</a>.',
+        route_3: 'Master commands in <a href="cli.html">CLI</a>.',
+        route_4: 'Optimize in <a href="performance.html">performance</a>.',
+        route_5: 'Test code in the <a href="playground.html">playground</a>.',
+        card_q_title: 'Quickstart',
+        card_q_desc: 'Run your first .opn file and learn the language basics.',
+        open_guide: 'Open guide',
+        card_s_title: 'Full syntax',
+        card_s_desc: 'Comments, operators, functions, classes, arrays and maps.',
+        see_syntax: 'View syntax',
+        card_p_title: 'Performance',
+        card_p_desc: 'LRU cache and practices for fast stable execution.',
+        optimize_now: 'Optimize now',
+        card_cli_title: 'CLI commands',
+        card_cli_desc: 'run, check, compile, stats, debug, repl and watch with examples.',
+        go_cli: 'Go to CLI',
+        card_play_title: 'Playground',
+        card_play_desc: 'Editor + console for basic browser-side testing.',
+        open_playground: 'Open playground',
+        example_title: 'Base OPN example',
+        example_intro: 'Snippet to validate variables, functions and output.',
+        copy_snippet: 'Copy snippet',
+        footer_note: 'OPN Docs Web. Source: README.md and docs/*.md.',
+        copied: 'Copied',
+        copy_error: 'Error'
+      }
+    };
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/docs.js"></script>
 </body>
 </html>

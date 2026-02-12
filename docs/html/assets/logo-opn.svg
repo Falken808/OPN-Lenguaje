@@ -1,0 +1,89 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+
+  <defs>
+    <!-- Fondo moderno -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A5BFF"/>
+      <stop offset="100%" stop-color="#00C6A2"/>
+    </linearGradient>
+
+    <!-- Cuerpo -->
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE46B"/>
+      <stop offset="100%" stop-color="#F4C430"/>
+    </linearGradient>
+
+    <!-- Pico -->
+    <linearGradient id="beak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFA726"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="url(#bg)"/>
+
+  <!-- Sombra suave -->
+  <ellipse cx="270" cy="360" rx="110" ry="28" fill="rgba(0,0,0,0.08)"/>
+
+  <!-- Cuerpo (forma gota limpia) -->
+  <path d="
+      M170 300
+      C170 240 220 210 290 210
+      C360 210 400 250 400 295
+      C400 345 350 380 290 380
+      C220 380 170 350 170 300
+      Z"
+      fill="url(#body)"
+      stroke="#1C2C7A"
+      stroke-width="16"
+      stroke-linejoin="round"
+  />
+
+  <!-- Cabeza -->
+  <circle cx="320" cy="205" r="75"
+      fill="url(#body)"
+      stroke="#1C2C7A"
+      stroke-width="16"
+  />
+
+  <!-- Ala integrada -->
+  <path d="
+      M245 305
+      C270 275 320 275 335 305
+      C310 330 270 335 245 305
+      Z"
+      fill="#FFD84F"
+      stroke="#1C2C7A"
+      stroke-width="10"
+      stroke-linejoin="round"
+  />
+
+  <!-- Pico limpio y horizontal -->
+  <path d="
+      M385 205
+      C420 200 450 210 450 225
+      C450 240 420 250 385 245
+      Z"
+      fill="url(#beak)"
+      stroke="#1C2C7A"
+      stroke-width="10"
+      stroke-linejoin="round"
+  />
+
+  <!-- Ojo -->
+  <circle cx="335" cy="190" r="9" fill="#1C2C7A"/>
+
+  <!-- Texto OPN -->
+  <text x="256"
+        y="120"
+        text-anchor="middle"
+        font-size="64"
+        font-weight="700"
+        font-family="Inter, system-ui, sans-serif"
+        letter-spacing="10"
+        fill="#FFFFFF">
+    OPN
+  </text>
+
+</svg>

@@ -1,51 +1,90 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sintaxis OPN</title>
+  <title>OPN Docs | Sintaxis</title>
+  <meta name="description" content="Referencia completa de sintaxis OPN." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main>
-    <header class="hero">
-      <div class="pill">Referencia</div>
-      <div class="pill">Sintaxis</div>
-      <h1>Sintaxis OPN</h1>
-      <p>Resumen de las construcciones esenciales del lenguaje.</p>
-      <nav class="top">
-        <a href="index.html">Inicio</a>
-        <a href="quickstart.html">Inicio rapido</a>
-        <a href="performance.html">Rendimiento</a>
-        <a href="ia-form.html">Formulario IA</a>
-      </nav>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="index.html">
+          <img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" />
+          <div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Referencia de sintaxis</p></div>
+        </a>
+        <div class="topbar-actions">
+          <div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div>
+          <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button>
+        </div>
+        <nav id="main-nav" class="nav" data-main-nav>
+          <a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a>
+        </nav>
+      </div>
     </header>
 
-    <section>
-      <h2>Variables y funciones</h2>
-      <pre>var nombre = "OPN";
-function suma(a, b) {
-    return a + b;
-}</pre>
-      <p>Alias corto: <code>func</code> tambien sirve para declarar funciones.</p>
-      <pre>func suma(a, b) {
-    return a + b;
-}</pre>
-    </section>
+    <main class="page-main">
+      <div class="container">
+        <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Referencia completa</span><h1 class="page-title" data-i18n="title">Sintaxis de OPN</h1><p class="page-intro" data-i18n="intro">Guia rapida de comentarios, tipos, control de flujo, funciones, clases y colecciones.</p></article></section>
 
-    <section>
-      <h2>Condicionales y bucles</h2>
-      <pre>if (x > 10) { print("alto"); } else { print("bajo"); }
-for (var i = 0; i &lt; 3; i = i + 1) { print(i); }</pre>
-    </section>
+        <section class="section section-grid grid-2">
+          <article class="card reveal"><h2 data-i18n="comments">Comentarios y variables</h2><pre id="s-code-1"><code>// Comentario simple
+/* Comentario multilinea */
+var nombre = "OPN";
+var edad = 25;
+var activo = true;
+var lista = [1, 2, 3];
+var mapa = {"a": 1};</code></pre><button class="btn-copy" data-copy-target="#s-code-1" data-i18n="copy">Copiar</button></article>
+          <article class="card reveal"><h2 data-i18n="ops">Operadores</h2><ul class="list-clean"><li data-i18n="ops_1">Aritmeticos: +, -, *, /, %</li><li data-i18n="ops_2">Comparacion: ==, !=, >, <, >=, <=</li><li data-i18n="ops_3">Logicos: &&, ||, !</li></ul></article>
+        </section>
 
-    <section class="callout">
-      <h2>Clases</h2>
-      <pre>class Persona {
-    function init(nombre) { this.nombre = nombre; }
-    function saludar() { print("Hola " + this.nombre); }
-}</pre>
-    </section>
-  </main>
+        <section class="section section-grid grid-2">
+          <article class="card reveal"><h2 data-i18n="flow">Condicionales y bucles</h2><pre id="s-code-2"><code>if (edad < 18) {
+  print("Menor");
+} else if (edad < 65) {
+  print("Adulto");
+} else {
+  print("Jubilado");
+}
+
+for (var i = 0; i < 5; i = i + 1) {
+  print(i);
+}</code></pre><button class="btn-copy" data-copy-target="#s-code-2" data-i18n="copy">Copiar</button></article>
+          <article class="card reveal"><h2 data-i18n="funcs">Funciones y clases</h2><pre id="s-code-3"><code>function suma(a, b) {
+  return a + b;
+}
+
+class Persona {
+  function init(nombre) { this.nombre = nombre; }
+  function saludar() { return "Hola, " + this.nombre; }
+}</code></pre><button class="btn-copy" data-copy-target="#s-code-3" data-i18n="copy">Copiar</button></article>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/syntax.md.</div></footer>
+  </div>
+
+  <script>
+    window.OPN_I18N = {
+      es: {
+        brand_subtitle: 'Referencia de sintaxis', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
+        kicker: 'Referencia completa', title: 'Sintaxis de OPN', intro: 'Guia rapida de comentarios, tipos, control de flujo, funciones, clases y colecciones.',
+        comments: 'Comentarios y variables', ops: 'Operadores', ops_1: 'Aritmeticos: +, -, *, /, %', ops_2: 'Comparacion: ==, !=, >, <, >=, <=', ops_3: 'Logicos: &&, ||, !',
+        flow: 'Condicionales y bucles', funcs: 'Funciones y clases', copy: 'Copiar', footer: 'Fuente: docs/syntax.md.', copied: 'Copiado', copy_error: 'Error'
+      },
+      en: {
+        brand_subtitle: 'Syntax reference', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
+        kicker: 'Complete reference', title: 'OPN syntax', intro: 'Fast guide to comments, types, flow control, functions, classes and collections.',
+        comments: 'Comments and variables', ops: 'Operators', ops_1: 'Arithmetic: +, -, *, /, %', ops_2: 'Comparison: ==, !=, >, <, >=, <=', ops_3: 'Logical: &&, ||, !',
+        flow: 'Conditionals and loops', funcs: 'Functions and classes', copy: 'Copy', footer: 'Source: docs/syntax.md.', copied: 'Copied', copy_error: 'Error'
+      }
+    };
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/docs.js"></script>
 </body>
 </html>
