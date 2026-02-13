@@ -1,4 +1,4 @@
-﻿var x = 2;
+var x = 2;
 if (x > 0) {
     if (x == 2) {
         print("two");

@@ -205,6 +205,9 @@ class Token:
 
 class Lexer:
     def __init__(self, code: str, source_name: Optional[str] = None):
+        # Allow UTF-8 BOM at file start (common on Windows editors).
+        if code.startswith("\ufeff"):
+            code = code.lstrip("\ufeff")
         self.source_name = source_name
         self.source_code = code
         self.code = LINE_COMMENT_REGEX.sub("", code)
@@ -1069,7 +1072,7 @@ def compile_opn(code: str, source_name: Optional[str] = None) -> Any:
 
 
 def compile_opn_file(source_path: str, output_path: str) -> str:
-    with open(source_path, "r", encoding="utf-8") as f:
+    with open(source_path, "r", encoding="utf-8-sig") as f:
         code = f.read()
     py_code = transpile_opn(code, source_name=source_path)
     with open(output_path, "w", encoding="utf-8", newline="\n") as f:
@@ -1504,7 +1507,7 @@ def main(argv: list[str]) -> int:
     if len(ns.args) == 1 and ns.args[0].endswith(".opn"):
         path = ns.args[0]
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8-sig") as f:
                 OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(
@@ -1528,7 +1531,7 @@ def main(argv: list[str]) -> int:
             )
         path = ns.args[1]
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8-sig") as f:
                 OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(

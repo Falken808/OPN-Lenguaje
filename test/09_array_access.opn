@@ -1,4 +1,4 @@
-﻿var numbers = [10, 20, 30, 40];
+var numbers = [10, 20, 30, 40];
 print(numbers[0]);
 numbers[1] = 99;
 print(numbers[1]);

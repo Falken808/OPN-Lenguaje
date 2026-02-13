@@ -1,4 +1,4 @@
-﻿// INVALID TEST: block-closing + ';' can break parser in this language
+// INVALID TEST: block-closing + ';' can break parser in this language
 function bad() {
     print("x");
 };

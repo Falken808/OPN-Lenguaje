@@ -1,4 +1,4 @@
-﻿class Box {
+class Box {
     function init() {
         this.items = [1, 2, 3];
     }

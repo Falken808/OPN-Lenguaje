@@ -1,2 +1,2 @@
-﻿var message = "Hello OPN BluePanda";
+var message = "Hello OPN BluePanda";
 print(message);

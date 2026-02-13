@@ -1,4 +1,4 @@
-﻿class Counter {
+class Counter {
     function init() {
         this.value = 0;
     }

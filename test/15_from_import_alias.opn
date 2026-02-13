@@ -1,2 +1,2 @@
-﻿from math import floor as floor_int;
+from math import floor as floor_int;
 print(floor_int(9.8));

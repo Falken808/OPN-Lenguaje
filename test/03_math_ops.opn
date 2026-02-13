@@ -1,4 +1,4 @@
-﻿var a = 12;
+var a = 12;
 var b = 5;
 print(a + b);
 print(a - b);

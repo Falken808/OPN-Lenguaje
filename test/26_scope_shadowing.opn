@@ -1,4 +1,4 @@
-﻿var value = 10;
+var value = 10;
 function read() {
     var value = 20;
     return value;

@@ -1,4 +1,4 @@
-﻿var score = 72;
+var score = 72;
 if (score >= 70) {
     print("approved");
 } else {

@@ -1,4 +1,4 @@
-﻿// INVALID TEST: try/catch is not supported in current grammar
+// INVALID TEST: try/catch is not supported in current grammar
 try {
     print("x");
 } catch (e) {

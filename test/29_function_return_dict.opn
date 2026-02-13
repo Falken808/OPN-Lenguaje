@@ -1,4 +1,4 @@
-﻿function make_user(name, level) {
+function make_user(name, level) {
     return {"name": name, "level": level};
 }
 var u = make_user("Noa", 3);

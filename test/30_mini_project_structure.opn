@@ -1,4 +1,4 @@
-﻿class Task {
+class Task {
     function init(title) {
         this.title = title;
         this.done = false;

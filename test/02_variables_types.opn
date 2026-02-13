@@ -1,4 +1,4 @@
-﻿var username = "ana";
+var username = "ana";
 var age = 26;
 var height = 1.68;
 var active = true;

@@ -1,4 +1,4 @@
-﻿var user = {"name": "Lia", "city": "Lima"};
+var user = {"name": "Lia", "city": "Lima"};
 print(user["name"]);
 user["city"] = "Cusco";
 print(user["city"]);

@@ -1,4 +1,4 @@
-﻿// INVALID TEST: do...while is not supported
+// INVALID TEST: do...while is not supported
 var i = 0;
 do {
     i = i + 1;

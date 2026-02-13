@@ -1,4 +1,4 @@
-﻿var data = null;
+var data = null;
 if (data == null) {
     print("empty");
 } else {
