@@ -1437,6 +1437,9 @@ def main(argv: list[str]) -> int:
         description="Interprete, compilador y empaquetador de OPN BluePanda.",
     )
     parser.add_argument(
+        "-v", "--version", "--Version", action="version", version=f"OPN BluePanda v{RUNTIME_VERSION}"
+    )
+    parser.add_argument(
         "args",
         nargs="+",
         help="Uso: opn2.py archivo.opn | opn2.py run archivo.opn | opn2.py compile in.opn -o out.py | opn2.py build app.opn -o dist/app",
