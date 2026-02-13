@@ -1,112 +1,65 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Docs | Quickstart</title>
-  <meta name="description" content="Guia de inicio rapido OPN en 5 minutos." />
+  <title>OPN BluePanda Docs | Quickstart</title>
+  <meta name="description" content="Quickstart guide for OPN BluePanda." />
   <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
-    <header class="topbar">
-      <div class="container topbar-inner">
-        <a class="brand" href="index.html">
-          <img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" />
-          <div>
-            <p class="brand-title">OPN Docs</p>
-            <p class="brand-subtitle" data-i18n="brand_subtitle">Guia de inicio rapido</p>
-          </div>
-        </a>
-        <div class="topbar-actions">
-          <div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div>
-          <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button>
-        </div>
-        <nav id="main-nav" class="nav" data-main-nav>
-          <a href="index.html" data-i18n="nav_home">Inicio</a>
-          <a href="quickstart.html">Quickstart</a>
-          <a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a>
-          <a href="performance.html" data-i18n="nav_perf">Rendimiento</a>
-          <a href="cli.html">CLI</a>
-          <a href="playground.html" data-i18n="nav_playground">Playground</a>
-          <a href="ia-form.html">IA</a>
-        </nav>
-      </div>
-    </header>
+    <header class="topbar"><div class="container topbar-inner">
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Quickstart guide</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Syntax</a><a href="performance.html" data-i18n="nav_perf">Performance</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html" data-i18n="nav_ai">AI</a></nav>
+    </div></header>
 
-    <main class="page-main">
-      <div class="container">
-        <section class="hero">
-          <article class="panel hero-panel">
-            <span class="kicker" data-i18n="kicker">Inicio rapido</span>
-            <h1 class="page-title" data-i18n="title">OPN en 5 minutos</h1>
-            <p class="page-intro" data-i18n="intro">Crea tus primeros programas, usa variables y funciones, y ejecuta desde Python o desde opn.exe en Windows.</p>
-          </article>
-        </section>
+    <main class="page-main"><div class="container">
+      <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Quickstart</span><h1 class="page-title" data-i18n="title">Get running in under 10 minutes</h1><p class="page-intro" data-i18n="intro">Create your first file, run it, compile it, install dependencies, and build a portable binary.</p></article></section>
 
-        <section class="section section-grid grid-2">
-          <article class="card reveal">
-            <h2 data-i18n="step1">Paso 1: primer archivo</h2>
-            <p class="code-block-title">hola.opn</p>
-            <pre id="q-code-1"><code>print("Hola, OPN!");</code></pre>
-            <button class="btn-copy" data-copy-target="#q-code-1" data-i18n="copy">Copiar</button>
-          </article>
+      <section class="section section-grid grid-2">
+        <article class="card reveal"><h2 data-i18n="step1">Step 1: create a file</h2><p class="code-block-title">hello.opn</p><pre id="q-code-1"><code>var greeting = "Hello BluePanda";
+print(greeting);</code></pre><button class="btn-copy" data-copy-target="#q-code-1" data-i18n="copy">Copy</button></article>
+        <article class="card reveal"><h2 data-i18n="step2">Step 2: run it</h2><pre id="q-code-2"><code>opn hello.opn</code></pre><button class="btn-copy" data-copy-target="#q-code-2" data-i18n="copy">Copy</button></article>
+      </section>
 
-          <article class="card reveal" data-command-group>
-            <h2 data-i18n="run_title">Ejecucion</h2>
-            <div class="command-tabs" data-command-tabs>
-              <button class="command-tab is-active" data-tab-target="q-run-linux">Linux/macOS</button>
-              <button class="command-tab" data-tab-target="q-run-windows">Windows</button>
-            </div>
-            <div id="q-run-linux" class="command-panel is-active"><pre><code>python opn2.py hola.opn</code></pre></div>
-            <div id="q-run-windows" class="command-panel"><pre><code>.\opn.exe hola.opn</code></pre></div>
-          </article>
-        </section>
+      <section class="section section-grid grid-2">
+        <article class="card reveal"><h2 data-i18n="step3">Step 3: compile to Python</h2><pre id="q-code-3"><code>opn compile hello.opn -o hello.py
+python hello.py</code></pre><button class="btn-copy" data-copy-target="#q-code-3" data-i18n="copy">Copy</button></article>
+        <article class="card reveal"><h2 data-i18n="step4">Step 4: dependencies and build</h2><pre id="q-code-4"><code>opn -m pip install pygame
+opn build hello.opn -o dist/hello</code></pre><button class="btn-copy" data-copy-target="#q-code-4" data-i18n="copy">Copy</button></article>
+      </section>
 
-        <section class="section section-grid grid-2">
-          <article class="card reveal">
-            <h2 data-i18n="step2">Paso 2: variables</h2>
-            <pre id="q-code-2"><code>var edad = 25;
-var nombre = "Carlos";
-var altura = 1.75;
+      <section class="section card reveal">
+        <h2 data-i18n="next_title">Next steps</h2>
+        <ul class="list-clean">
+          <li data-i18n="next_1" data-i18n-html="1">Read <a href="syntax.html">Syntax</a> for full language coverage.</li>
+          <li data-i18n="next_2" data-i18n-html="1">Read <a href="cli.html">CLI</a> for command details.</li>
+          <li data-i18n="next_3" data-i18n-html="1">Use <a href="ia-form.html">AI Prompt</a> to teach assistants your project context.</li>
+        </ul>
+      </section>
+    </div></main>
 
-print("Nombre: " + nombre);
-print("Edad: " + edad);
-print("Altura: " + altura + " metros");</code></pre>
-            <button class="btn-copy" data-copy-target="#q-code-2" data-i18n="copy">Copiar</button>
-          </article>
-
-          <article class="card reveal">
-            <h2 data-i18n="step3">Paso 3: funciones</h2>
-            <pre id="q-code-3"><code>function suma(a, b) {
-    return a + b;
-}
-
-print(suma(10, 20));</code></pre>
-            <button class="btn-copy" data-copy-target="#q-code-3" data-i18n="copy">Copiar</button>
-            <div class="callout" style="margin-top:12px;" data-i18n="tip">Para produccion: python opn2.py compile app.opn -o app.py</div>
-          </article>
-        </section>
-      </div>
-    </main>
-
-    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/quickstart.md.</div></footer>
+    <footer class="footer"><div class="container" data-i18n="footer">Source: docs/quickstart.md.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'Guia de inicio rapido', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        kicker: 'Inicio rapido', title: 'OPN en 5 minutos', intro: 'Crea tus primeros programas, usa variables y funciones, y ejecuta desde Python o desde opn.exe en Windows.',
-        step1: 'Paso 1: primer archivo', run_title: 'Ejecucion', step2: 'Paso 2: variables', step3: 'Paso 3: funciones', copy: 'Copiar',
-        tip: 'Para produccion: python opn2.py compile app.opn -o app.py', footer: 'Fuente: docs/quickstart.md.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'Quickstart guide', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        kicker: 'Quickstart', title: 'OPN in 5 minutes', intro: 'Create your first programs, use variables and functions, and run from Python or opn.exe on Windows.',
-        step1: 'Step 1: first file', run_title: 'Run', step2: 'Step 2: variables', step3: 'Step 3: functions', copy: 'Copy',
-        tip: 'For production: python opn2.py compile app.opn -o app.py', footer: 'Source: docs/quickstart.md.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'Quickstart guide', menu_btn: 'Menu', nav_home: 'Home', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground', nav_ai: 'AI',
+        kicker: 'Quickstart', title: 'Get running in under 10 minutes', intro: 'Create your first file, run it, compile it, install dependencies, and build a portable binary.',
+        step1: 'Step 1: create a file', step2: 'Step 2: run it', step3: 'Step 3: compile to Python', step4: 'Step 4: dependencies and build', copy: 'Copy',
+        next_title: 'Next steps', next_1: 'Read <a href="syntax.html">Syntax</a> for full language coverage.', next_2: 'Read <a href="cli.html">CLI</a> for command details.', next_3: 'Use <a href="ia-form.html">AI Prompt</a> to teach assistants your project context.',
+        footer: 'Source: docs/quickstart.md.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'Guia de inicio rapido', menu_btn: 'Menu', nav_home: 'Inicio', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground', nav_ai: 'IA',
+        kicker: 'Inicio rapido', title: 'Empieza en menos de 10 minutos', intro: 'Crea tu primer archivo, ejecutalo, compilalo, instala dependencias y genera binario portable.',
+        step1: 'Paso 1: crear archivo', step2: 'Paso 2: ejecutar', step3: 'Paso 3: compilar a Python', step4: 'Paso 4: dependencias y build', copy: 'Copiar',
+        next_title: 'Siguientes pasos', next_1: 'Lee <a href="syntax.html">Sintaxis</a> para cobertura completa.', next_2: 'Lee <a href="cli.html">CLI</a> para detalles de comandos.', next_3: 'Usa <a href="ia-form.html">Prompt IA</a> para dar contexto del proyecto a asistentes.',
+        footer: 'Fuente: docs/quickstart.md.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

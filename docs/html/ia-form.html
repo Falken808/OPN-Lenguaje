@@ -1,60 +1,114 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Docs | Prompt IA</title>
-  <meta name="description" content="Plantilla de prompt para usar OPN con asistentes IA." />
+  <title>OPN BluePanda Docs | AI Prompt</title>
+  <meta name="description" content="Long-form AI prompt template with references for OPN BluePanda projects." />
   <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar"><div class="container topbar-inner">
-      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Plantilla IA</p></div></a>
-      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
-      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a></nav>
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">AI prompt template</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Syntax</a><a href="performance.html" data-i18n="nav_perf">Performance</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html" data-i18n="nav_ai">AI</a></nav>
     </div></header>
 
     <main class="page-main"><div class="container">
-      <section class="hero"><article class="panel hero-panel"><span class="kicker">IA workflow</span><h1 class="page-title" data-i18n="title">Formulario de prompt para asistentes IA</h1><p class="page-intro" data-i18n="intro">Copia este prompt y ajusta nivel + tema para que una IA te ensene OPN.</p></article></section>
+      <section class="hero"><article class="panel hero-panel"><span class="kicker">AI workflow</span><h1 class="page-title" data-i18n="title">Long AI prompt with references</h1><p class="page-intro" data-i18n="intro">Use this extended prompt so assistants can reason better about your OPN BluePanda project and stay aligned with the real parser/runtime.</p></article></section>
 
       <section class="section card reveal">
-        <h2 data-i18n="prompt_title">Prompt listo para copiar</h2>
-        <pre id="ai-prompt"><code>Eres un asistente experto en el lenguaje OPN.
+        <h2 data-i18n="prompt_title">Prompt (copy and customize)</h2>
+        <pre id="ai-prompt"><code>You are a technical assistant specialized in OPN BluePanda (version 0.1.2).
 
-Objetivo:
-- Ensenarme a programar en OPN desde nivel [principiante/intermedio/avanzado].
+Mission:
+- Help me write, debug, optimize, and document OPN code.
+- Prioritize accurate behavior based on current project capabilities.
 
-Contexto del lenguaje:
-- OPN soporta: var, function, class, if, else, while, for, return, true, false, null, this, import, from, as.
-- Sintaxis tipo C/JS con llaves y ; al final de sentencia.
-- Se transpila a Python y se ejecuta sobre Python.
+Repository context:
+- Language name: OPN BluePanda
+- Stable CLI command: opn
+- Runtime model: OPN transpiles to Python and executes on Python runtime.
+- Main command set:
+  - opn app.opn
+  - opn run app.opn
+  - opn compile app.opn -o app.py
+  - opn -m pip install &lt;package&gt;
+  - opn build app.opn -o dist/app
 
-Reglas de respuesta:
-1) Explica cada concepto con ejemplos en OPN.
-2) Incluye version corregida si mi codigo tiene errores.
-3) Muestra comparacion corta OPN vs Python cuando ayude.
-4) Usa pasos concretos, sin teoria innecesaria.
-5) Si falta contexto, haz maximo 3 preguntas.</code></pre>
-        <button class="btn-copy" data-copy-target="#ai-prompt" data-i18n="copy_prompt">Copiar prompt</button>
+Environment behavior:
+- Project-local .venv is used.
+- Missing imports may trigger dependency auto-install.
+- Dependencies are recorded in opn.json.
+- Build command uses PyInstaller in .venv.
+
+Supported syntax (authoritative):
+- var, function, func, class, if, else, while, for, return
+- true, false, null, this
+- import, from, as
+
+Constraints:
+- Do not assume unsupported grammar features as available.
+- If proposing new features, clearly label them as "proposal".
+- Keep examples executable under current syntax.
+
+Reasoning process requirements:
+1) Restate the user goal in one sentence.
+2) Identify parser/runtime constraints that affect the solution.
+3) Provide a minimal working OPN solution first.
+4) Provide an optional improved version if needed.
+5) Explain trade-offs briefly.
+
+Output format:
+- Summary
+- OPN code
+- Python equivalent (when useful)
+- Common mistakes
+- Next steps
+
+Reference files to consult first:
+1. README.md
+2. docs/quickstart.md
+3. docs/syntax.md
+4. docs/compiler_cli.md
+5. docs/performance.md
+6. docs/ia_formulario.md
+
+If context is missing, ask at most 3 direct questions.
+</code></pre>
+        <button class="btn-copy" data-copy-target="#ai-prompt" data-i18n="copy_prompt">Copy prompt</button>
+      </section>
+
+      <section class="section card reveal">
+        <h2 data-i18n="tips_title">Prompt usage tips</h2>
+        <ul class="list-clean">
+          <li data-i18n="tip1">Include exact errors and the full `.opn` snippet.</li>
+          <li data-i18n="tip2">Tell the assistant if you target learning, prototyping, or production.</li>
+          <li data-i18n="tip3">Ask for tests/examples that match current parser support.</li>
+        </ul>
       </section>
     </div></main>
 
-    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/ia_formulario.md.</div></footer>
+    <footer class="footer"><div class="container" data-i18n="footer">Source: docs/ia_formulario.md.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'Plantilla IA', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        title: 'Formulario de prompt para asistentes IA', intro: 'Copia este prompt y ajusta nivel + tema para que una IA te ensene OPN.', prompt_title: 'Prompt listo para copiar',
-        copy_prompt: 'Copiar prompt', footer: 'Fuente: docs/ia_formulario.md.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'AI template', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        title: 'Prompt form for AI assistants', intro: 'Copy this prompt and set level + topic so an AI can teach you OPN.', prompt_title: 'Prompt ready to copy',
-        copy_prompt: 'Copy prompt', footer: 'Source: docs/ia_formulario.md.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'AI prompt template', menu_btn: 'Menu', nav_home: 'Home', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground', nav_ai: 'AI',
+        title: 'Long AI prompt with references', intro: 'Use this extended prompt so assistants can reason better about your OPN BluePanda project and stay aligned with the real parser/runtime.',
+        prompt_title: 'Prompt (copy and customize)', copy_prompt: 'Copy prompt', tips_title: 'Prompt usage tips',
+        tip1: 'Include exact errors and the full `.opn` snippet.', tip2: 'Tell the assistant if you target learning, prototyping, or production.', tip3: 'Ask for tests/examples that match current parser support.',
+        footer: 'Source: docs/ia_formulario.md.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'Plantilla de prompt IA', menu_btn: 'Menu', nav_home: 'Inicio', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground', nav_ai: 'IA',
+        title: 'Prompt largo para IA con referencias', intro: 'Usa este prompt extendido para que los asistentes razonen mejor sobre tu proyecto OPN BluePanda y respeten el parser/runtime real.',
+        prompt_title: 'Prompt (copiar y personalizar)', copy_prompt: 'Copiar prompt', tips_title: 'Consejos de uso del prompt',
+        tip1: 'Incluye errores exactos y el snippet `.opn` completo.', tip2: 'Indica si tu objetivo es aprendizaje, prototipo o produccion.', tip3: 'Pide ejemplos/tests que respeten el parser actual.',
+        footer: 'Fuente: docs/ia_formulario.md.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

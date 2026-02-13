@@ -1,40 +1,40 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Platform | Inicio</title>
-  <meta name="description" content="Landing principal de OPN con acceso a toda la documentacion web." />
+  <title>OPN BluePanda | Home</title>
+  <meta name="description" content="Root landing page for OPN BluePanda documentation and web tools." />
   <link rel="icon" type="image/svg+xml" href="docs/html/assets/logo-opn.svg" />
   <link rel="stylesheet" href="docs/html/styles.css" />
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar"><div class="container topbar-inner">
-      <a class="brand" href="index.html"><img class="brand-icon" src="docs/html/assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Platform</p><p class="brand-subtitle" data-i18n="brand_subtitle">Lenguaje simple, poderoso e intuitivo</p></div></a>
-      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
-      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="docs/html/index.html" data-i18n="nav_docs">Docs</a><a href="docs/html/quickstart.html">Quickstart</a><a href="docs/html/syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="docs/html/performance.html" data-i18n="nav_perf">Rendimiento</a><a href="docs/html/playground.html" data-i18n="nav_playground">Playground</a></nav>
+      <a class="brand" href="index.html"><img class="brand-icon" src="docs/html/assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda</p><p class="brand-subtitle" data-i18n="brand_subtitle">Language + docs platform</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="docs/html/index.html" data-i18n="nav_docs">Docs</a><a href="docs/html/quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="docs/html/syntax.html" data-i18n="nav_syntax">Syntax</a><a href="docs/html/performance.html" data-i18n="nav_perf">Performance</a><a href="docs/html/playground.html" data-i18n="nav_playground">Playground</a></nav>
     </div></header>
 
     <section class="hero"><div class="container hero-grid">
-      <article class="panel hero-panel float-in"><span class="kicker"><span class="pulse-dot" aria-hidden="true"></span> OPN</span><h1 class="page-title" data-i18n="title">Plataforma web renovada con docs completas y laboratorio integrado</h1><p class="page-intro" data-i18n="intro">Desde esta raiz accedes al portal de documentacion, al playground para pruebas y a todas las guias tecnicas.</p></article>
-      <aside class="panel reveal"><h2 data-i18n="quick_access">Accesos directos</h2><ul class="list-clean"><li><a href="docs/html/index.html" data-i18n="acc_1">Portal docs principal</a></li><li><a href="docs/html/cli.html">CLI</a></li><li><a href="docs/html/playground.html" data-i18n="acc_3">Editor y consola</a></li><li><a href="README.md" data-i18n="acc_4">README del proyecto</a></li></ul></aside>
+      <article class="panel hero-panel float-in"><span class="kicker"><span class="pulse-dot" aria-hidden="true"></span> OPN BluePanda</span><h1 class="page-title" data-i18n="title">Single entry point for docs, CLI guides, and AI workflows</h1><p class="page-intro" data-i18n="intro">Use this root page to jump into the full web docs or the Markdown docs in the repository.</p></article>
+      <aside class="panel reveal"><h2 data-i18n="quick_access">Quick links</h2><ul class="list-clean"><li><a href="docs/html/index.html" data-i18n="acc_1">Main docs portal</a></li><li><a href="docs/html/cli.html">CLI</a></li><li><a href="docs/html/ia-form.html" data-i18n="acc_2">AI prompt guide</a></li><li><a href="README.md" data-i18n="acc_3">Repository README</a></li></ul></aside>
     </div></section>
 
-    <footer class="footer"><div class="container" data-i18n="footer">Indice raiz del proyecto OPN.</div></footer>
+    <footer class="footer"><div class="container" data-i18n="footer">Root index for OPN BluePanda.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'Lenguaje simple, poderoso e intuitivo', menu_btn: 'Menu', nav_home: 'Inicio', nav_docs: 'Docs', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        title: 'Plataforma web renovada con docs completas y laboratorio integrado', intro: 'Desde esta raiz accedes al portal de documentacion, al playground para pruebas y a todas las guias tecnicas.',
-        quick_access: 'Accesos directos', acc_1: 'Portal docs principal', acc_3: 'Editor y consola', acc_4: 'README del proyecto', footer: 'Indice raiz del proyecto OPN.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'Simple, powerful and intuitive language', menu_btn: 'Menu', nav_home: 'Home', nav_docs: 'Docs', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        title: 'Renewed web platform with complete docs and integrated lab', intro: 'From this root page you can access docs, the testing playground and all technical guides.',
-        quick_access: 'Quick access', acc_1: 'Main docs portal', acc_3: 'Editor and console', acc_4: 'Project README', footer: 'OPN project root index.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'Language + docs platform', menu_btn: 'Menu', nav_home: 'Home', nav_docs: 'Docs', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
+        title: 'Single entry point for docs, CLI guides, and AI workflows', intro: 'Use this root page to jump into the full web docs or the Markdown docs in the repository.',
+        quick_access: 'Quick links', acc_1: 'Main docs portal', acc_2: 'AI prompt guide', acc_3: 'Repository README', footer: 'Root index for OPN BluePanda.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'Plataforma de lenguaje y documentacion', menu_btn: 'Menu', nav_home: 'Inicio', nav_docs: 'Docs', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
+        title: 'Punto unico de entrada para docs, CLI y flujos IA', intro: 'Usa esta pagina raiz para entrar a la web de documentacion o a los Markdown del repositorio.',
+        quick_access: 'Enlaces rapidos', acc_1: 'Portal principal de docs', acc_2: 'Guia de prompt IA', acc_3: 'README del repositorio', footer: 'Indice raiz de OPN BluePanda.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

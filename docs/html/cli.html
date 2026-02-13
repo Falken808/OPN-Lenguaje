@@ -1,54 +1,58 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Docs | CLI</title>
-  <meta name="description" content="Documentacion web de CLI y compilacion OPN." />
+  <title>OPN BluePanda Docs | CLI</title>
+  <meta name="description" content="CLI reference for OPN BluePanda: run, compile, venv module proxy, and build." />
   <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar"><div class="container topbar-inner">
-      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">CLI y compilacion</p></div></a>
-      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
-      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a></nav>
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">CLI and build</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Syntax</a><a href="performance.html" data-i18n="nav_perf">Performance</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html" data-i18n="nav_ai">AI</a></nav>
     </div></header>
 
     <main class="page-main"><div class="container">
-      <section class="hero"><article class="panel hero-panel"><span class="kicker">Command line</span><h1 class="page-title" data-i18n="title">CLI de OPN y flujo de compilacion</h1><p class="page-intro" data-i18n="intro">Comandos para ejecutar, validar, compilar, depurar y empaquetar scripts OPN.</p></article></section>
+      <section class="hero"><article class="panel hero-panel"><span class="kicker">Command line</span><h1 class="page-title" data-i18n="title">Command reference for V0.1.2</h1><p class="page-intro" data-i18n="intro">Run scripts, compile to Python, execute Python modules inside `.venv`, and build portable binaries.</p></article></section>
 
       <section class="section section-grid grid-2" data-command-group>
-        <article class="card reveal"><h2 data-i18n="basic">Comandos basicos</h2><div class="command-tabs" data-command-tabs><button class="command-tab is-active" data-tab-target="cli-run">run</button><button class="command-tab" data-tab-target="cli-check">check</button><button class="command-tab" data-tab-target="cli-compile">compile</button></div><div id="cli-run" class="command-panel is-active"><pre><code>python opn2.py programa.opn
-python opn2.py run programa.opn --verbose</code></pre></div><div id="cli-check" class="command-panel"><pre><code>python opn2.py check programa.opn</code></pre></div><div id="cli-compile" class="command-panel"><pre><code>python opn2.py compile programa.opn -o programa.py
-python programa.py</code></pre></div></article>
-        <article class="card reveal"><h2 data-i18n="analysis">Analisis y debug</h2><pre id="cli-code-1"><code>python opn2.py stats programa.opn
-python opn2.py debug programa.opn</code></pre><button class="btn-copy" data-copy-target="#cli-code-1" data-i18n="copy">Copiar</button></article>
+        <article class="card reveal"><h2 data-i18n="basic">Core commands</h2><div class="command-tabs" data-command-tabs><button class="command-tab is-active" data-tab-target="cli-run">run</button><button class="command-tab" data-tab-target="cli-compile">compile</button><button class="command-tab" data-tab-target="cli-build">build</button></div><div id="cli-run" class="command-panel is-active"><pre><code>opn app.opn
+opn run app.opn</code></pre></div><div id="cli-compile" class="command-panel"><pre><code>opn compile app.opn -o app.py
+python app.py</code></pre></div><div id="cli-build" class="command-panel"><pre><code>opn build app.opn -o dist/app</code></pre></div></article>
+        <article class="card reveal"><h2 data-i18n="venv">Environment modules</h2><pre id="cli-code-1"><code>opn -m pip install requests
+opn -m pip list
+opn -m pip --version</code></pre><button class="btn-copy" data-copy-target="#cli-code-1" data-i18n="copy">Copy</button></article>
       </section>
 
       <section class="section card reveal">
-        <h2 data-i18n="pack">Empaquetado ejecutable</h2>
-        <pre id="cli-code-2"><code>pip install pyinstaller
-pyinstaller --onefile programa.py</code></pre>
-        <button class="btn-copy" data-copy-target="#cli-code-2" data-i18n="copy">Copiar</button>
+        <h2 data-i18n="pack">Portable build output</h2>
+        <pre id="cli-code-2"><code>opn build game.opn
+# dist/game.exe on Windows
+# dist/game on Linux/macOS</code></pre>
+        <button class="btn-copy" data-copy-target="#cli-code-2" data-i18n="copy">Copy</button>
       </section>
     </div></main>
 
-    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/compiler_cli.md.</div></footer>
+    <footer class="footer"><div class="container" data-i18n="footer">Source: docs/compiler_cli.md.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'CLI y compilacion', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        title: 'CLI de OPN y flujo de compilacion', intro: 'Comandos para ejecutar, validar, compilar, depurar y empaquetar scripts OPN.', basic: 'Comandos basicos', analysis: 'Analisis y debug',
-        pack: 'Empaquetado ejecutable', copy: 'Copiar', footer: 'Fuente: docs/compiler_cli.md.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'CLI and compilation', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        title: 'OPN CLI and compilation flow', intro: 'Commands to run, validate, compile, debug and package OPN scripts.', basic: 'Basic commands', analysis: 'Analysis and debug',
-        pack: 'Executable packaging', copy: 'Copy', footer: 'Source: docs/compiler_cli.md.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'CLI and build', menu_btn: 'Menu', nav_home: 'Home', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground', nav_ai: 'AI',
+        title: 'Command reference for V0.1.2', intro: 'Run scripts, compile to Python, execute Python modules inside `.venv`, and build portable binaries.',
+        basic: 'Core commands', venv: 'Environment modules', pack: 'Portable build output', copy: 'Copy',
+        footer: 'Source: docs/compiler_cli.md.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'CLI y build', menu_btn: 'Menu', nav_home: 'Inicio', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground', nav_ai: 'IA',
+        title: 'Referencia de comandos para V0.1.2', intro: 'Ejecuta scripts, compila a Python, lanza modulos dentro de `.venv` y genera binarios portables.',
+        basic: 'Comandos base', venv: 'Modulos del entorno', pack: 'Salida de build portable', copy: 'Copiar',
+        footer: 'Fuente: docs/compiler_cli.md.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

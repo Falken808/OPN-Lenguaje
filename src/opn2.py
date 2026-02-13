@@ -1,8 +1,11 @@
 import argparse
 import ast
 import hashlib
+import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import traceback
 import warnings
@@ -155,6 +158,17 @@ LINE_COMMENT_REGEX = re.compile(r"//.*")
 # El transpiler inserta 5 lineas de preambulo y una linea en blanco antes del cuerpo.
 GENERATED_BODY_LINE_OFFSET = 6
 DEFAULT_CACHE_SIZE = 128
+DEFAULT_VENV_DIR = ".venv"
+DEFAULT_PROJECT_FILE = "opn.json"
+RUNTIME_VERSION = "0.1.2"
+MODULE_TO_PACKAGE = {
+    "PIL": "Pillow",
+    "cv2": "opencv-python",
+    "sklearn": "scikit-learn",
+    "yaml": "PyYAML",
+}
+DEFAULT_BUILD_WORK_DIR = ".opn_build"
+DEFAULT_DIST_DIR = "dist"
 
 
 class LRUCache:
@@ -1063,14 +1077,326 @@ def compile_opn_file(source_path: str, output_path: str) -> str:
     return output_path
 
 
+def _venv_python_path(venv_dir: str = DEFAULT_VENV_DIR) -> str:
+    if os.name == "nt":
+        return os.path.join(venv_dir, "Scripts", "python.exe")
+    return os.path.join(venv_dir, "bin", "python")
+
+
+def _normalize_package_name(requirement: str) -> str:
+    name = re.split(r"[<>=!~\[]", requirement, maxsplit=1)[0].strip()
+    return name
+
+
+def _module_to_package(module_name: str) -> str:
+    root = module_name.split(".", maxsplit=1)[0]
+    return MODULE_TO_PACKAGE.get(root, root)
+
+
+def load_opn_project(path: str = DEFAULT_PROJECT_FILE) -> dict[str, Any]:
+    if not os.path.exists(path):
+        return {
+            "name": os.path.basename(os.getcwd()),
+            "version": RUNTIME_VERSION,
+            "dependencies": [],
+        }
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return {
+            "name": os.path.basename(os.getcwd()),
+            "version": RUNTIME_VERSION,
+            "dependencies": [],
+        }
+
+    if not isinstance(data, dict):
+        data = {}
+    if "name" not in data or not isinstance(data.get("name"), str):
+        data["name"] = os.path.basename(os.getcwd())
+    data["version"] = RUNTIME_VERSION
+    dependencies = data.get("dependencies")
+    if not isinstance(dependencies, list):
+        dependencies = []
+    cleaned = []
+    for dep in dependencies:
+        if isinstance(dep, str) and dep.strip():
+            cleaned.append(dep.strip())
+    data["dependencies"] = cleaned
+    return data
+
+
+def save_opn_project(config: dict[str, Any], path: str = DEFAULT_PROJECT_FILE) -> None:
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(config, f, ensure_ascii=True, indent=2)
+        f.write("\n")
+
+
+def register_dependency(requirement: str, path: str = DEFAULT_PROJECT_FILE) -> None:
+    package = _normalize_package_name(requirement)
+    if not package:
+        return
+    config = load_opn_project(path)
+    dependencies = config.get("dependencies", [])
+    if package not in dependencies:
+        dependencies.append(package)
+    config["dependencies"] = sorted(set(dependencies), key=str.lower)
+    save_opn_project(config, path)
+
+
+def ensure_project_venv(venv_dir: str = DEFAULT_VENV_DIR) -> str:
+    python_bin = _venv_python_path(venv_dir)
+    if os.path.exists(python_bin):
+        return python_bin
+    print(f"Configurando entorno virtual en {venv_dir}...")
+    try:
+        subprocess.check_call([sys.executable, "-m", "venv", venv_dir])
+    except subprocess.CalledProcessError as err:
+        raise OPNError(
+            "No se pudo crear el entorno virtual del proyecto",
+            code="OPN4006",
+            phase="CLI",
+            details=str(err),
+            hint="Asegura que Python tenga 'venv/ensurepip' habilitado y vuelve a intentar.",
+        ) from err
+    return python_bin
+
+
+def ensure_pip_in_venv(python_bin: str) -> None:
+    pip_probe = subprocess.run(
+        [python_bin, "-m", "pip", "--version"],
+        capture_output=True,
+        text=True,
+    )
+    if pip_probe.returncode == 0:
+        return
+    ensurepip = subprocess.run(
+        [python_bin, "-m", "ensurepip", "--upgrade"],
+        capture_output=True,
+        text=True,
+    )
+    if ensurepip.returncode != 0:
+        detail = ensurepip.stderr.strip() or ensurepip.stdout.strip()
+        if detail:
+            detail = detail.splitlines()[-1]
+        raise OPNError(
+            "El entorno virtual no tiene pip disponible",
+            code="OPN4007",
+            phase="CLI",
+            details=detail if detail else None,
+            hint="Reinstala Python con ensurepip o instala pip manualmente en .venv.",
+        )
+
+
+def run_module_in_venv(module_args: list[str], venv_dir: str = DEFAULT_VENV_DIR) -> int:
+    if not module_args:
+        raise OPNError(
+            "Falta modulo para -m",
+            code="OPN4005",
+            phase="CLI",
+            hint="Uso: opn -m pip install requests",
+        )
+    python_bin = ensure_project_venv(venv_dir)
+    if module_args[0] == "pip":
+        ensure_pip_in_venv(python_bin)
+    completed = subprocess.run([python_bin, "-m", *module_args])
+    if completed.returncode == 0 and len(module_args) >= 2:
+        if module_args[0] == "pip" and module_args[1] == "install":
+            for token in module_args[2:]:
+                if token.startswith("-"):
+                    continue
+                register_dependency(token)
+    return completed.returncode
+
+
+def ensure_pyinstaller_in_venv(python_bin: str) -> None:
+    probe = subprocess.run(
+        [python_bin, "-m", "PyInstaller", "--version"],
+        capture_output=True,
+        text=True,
+    )
+    if probe.returncode == 0:
+        return
+    print("PyInstaller no esta disponible. Instalando en .venv...")
+    install = subprocess.run(
+        [python_bin, "-m", "pip", "install", "pyinstaller"],
+        capture_output=True,
+        text=True,
+    )
+    if install.returncode != 0:
+        detail = install.stderr.strip() or install.stdout.strip()
+        if detail:
+            detail = detail.splitlines()[-1]
+        raise OPNError(
+            "No se pudo instalar PyInstaller en el entorno virtual",
+            code="OPN4011",
+            phase="Build",
+            details=detail if detail else None,
+            hint="Intenta: opn -m pip install pyinstaller",
+        )
+
+
+def _default_binary_name(source_path: str) -> str:
+    base = os.path.splitext(os.path.basename(source_path))[0]
+    clean = re.sub(r"[^A-Za-z0-9_-]+", "-", base).strip("-")
+    return clean or "opn_app"
+
+
+def _binary_artifact_name(binary_name: str) -> str:
+    if os.name == "nt" and not binary_name.lower().endswith(".exe"):
+        return f"{binary_name}.exe"
+    return binary_name
+
+
+def build_opn_binary(source_path: str, output_path: Optional[str] = None) -> str:
+    if not source_path.endswith(".opn"):
+        raise OPNError(
+            "El comando build requiere un archivo .opn",
+            code="OPN4008",
+            phase="Build",
+            hint="Uso: opn build archivo.opn -o dist/miapp",
+        )
+    if not os.path.exists(source_path):
+        raise FileNotFoundError(source_path)
+
+    python_bin = ensure_project_venv()
+    ensure_pip_in_venv(python_bin)
+    ensure_pyinstaller_in_venv(python_bin)
+
+    os.makedirs(DEFAULT_BUILD_WORK_DIR, exist_ok=True)
+    os.makedirs(DEFAULT_DIST_DIR, exist_ok=True)
+
+    binary_name = _default_binary_name(source_path)
+    transpiled_entry = os.path.join(DEFAULT_BUILD_WORK_DIR, f"{binary_name}__entry.py")
+    compile_opn_file(source_path, transpiled_entry)
+
+    pyinstaller_work = os.path.join(DEFAULT_BUILD_WORK_DIR, "pyinstaller")
+    os.makedirs(pyinstaller_work, exist_ok=True)
+
+    cmd = [
+        python_bin,
+        "-m",
+        "PyInstaller",
+        "--noconfirm",
+        "--clean",
+        "--onefile",
+        "--name",
+        binary_name,
+        "--distpath",
+        DEFAULT_DIST_DIR,
+        "--workpath",
+        pyinstaller_work,
+        "--specpath",
+        DEFAULT_BUILD_WORK_DIR,
+        transpiled_entry,
+    ]
+    print(f"Empaquetando '{source_path}' como binario portable...")
+    build = subprocess.run(cmd, capture_output=True, text=True)
+    if build.returncode != 0:
+        detail = build.stderr.strip() or build.stdout.strip()
+        if detail:
+            detail = detail.splitlines()[-1]
+        raise OPNError(
+            "Fallo la generacion del binario",
+            code="OPN4010",
+            phase="Build",
+            source_name=source_path,
+            details=detail if detail else None,
+            hint="Revisa imports dinamicos o usa opn -m pip install pyinstaller --upgrade",
+        )
+
+    artifact = os.path.join(DEFAULT_DIST_DIR, _binary_artifact_name(binary_name))
+    if not os.path.exists(artifact):
+        raise OPNError(
+            "No se encontro el binario generado",
+            code="OPN4012",
+            phase="Build",
+            source_name=source_path,
+            hint="Revisa el directorio dist o ejecuta nuevamente opn build.",
+        )
+
+    if not output_path:
+        return artifact
+
+    destination = output_path
+    if output_path.endswith(os.sep) or os.path.isdir(output_path):
+        os.makedirs(output_path, exist_ok=True)
+        destination = os.path.join(output_path, os.path.basename(artifact))
+    else:
+        parent = os.path.dirname(output_path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+    shutil.copy2(artifact, destination)
+    return destination
+
+
 class OPNInterpreter:
     def __init__(self):
         self.globals = {"__builtins__": __builtins__}
 
-    def run(self, code: str, source_name: str = "<opn>") -> None:
+    def _is_running_in_venv(self, venv_dir: str = DEFAULT_VENV_DIR) -> bool:
+        abs_venv = os.path.normcase(os.path.abspath(venv_dir))
+        current = os.path.normcase(os.path.abspath(getattr(sys, "prefix", "")))
+        base = os.path.normcase(os.path.abspath(getattr(sys, "base_prefix", current)))
+        return current != base and current.startswith(abs_venv)
+
+    def _ensure_venv_and_install(self, module_name: str) -> str:
+        package = _module_to_package(module_name)
+        python_bin = ensure_project_venv()
+        ensure_pip_in_venv(python_bin)
+        print(
+            f"Libreria '{module_name}' no encontrada. "
+            f"Instalando '{package}' en {DEFAULT_VENV_DIR}..."
+        )
+        subprocess.check_call([python_bin, "-m", "pip", "install", package])
+        register_dependency(package)
+        print(f"Libreria '{package}' instalada correctamente.")
+        return package
+
+    def _rerun_inside_venv(self, source_path: Optional[str]) -> None:
+        python_bin = ensure_project_venv()
+        script_path = os.path.abspath(sys.argv[0]) if sys.argv else ""
+        if script_path and os.path.isfile(script_path) and script_path.lower().endswith(".py"):
+            cmd = [python_bin, script_path, *sys.argv[1:]]
+        elif source_path:
+            cmd = [python_bin, os.path.abspath(__file__), source_path]
+        else:
+            raise OPNError(
+                "No se pudo relanzar el programa dentro del entorno virtual",
+                code="OPN3004",
+                phase="Runtime",
+                hint="Ejecuta nuevamente: opn archivo.opn",
+            )
+        result = subprocess.run(cmd)
+        raise SystemExit(result.returncode)
+
+    def run(
+        self, code: str, source_name: str = "<opn>", source_path: Optional[str] = None
+    ) -> None:
         compiled = compile_opn(code, source_name=source_name)
         try:
             exec(compiled, self.globals)
+        except ModuleNotFoundError as err:
+            missing_module = err.name or "desconocido"
+            try:
+                self._ensure_venv_and_install(missing_module)
+            except subprocess.CalledProcessError as install_err:
+                raise OPNError(
+                    "No se pudo instalar la dependencia faltante",
+                    code="OPN3002",
+                    phase="Runtime",
+                    source_name=source_name,
+                    source_code=code,
+                    details=str(install_err),
+                    hint=f"Prueba con: opn -m pip install {missing_module}",
+                ) from install_err
+
+            if self._is_running_in_venv():
+                compiled = compile_opn(code, source_name=source_name)
+                exec(compiled, self.globals)
+                return
+
+            self._rerun_inside_venv(source_path or source_name)
         except OPNError:
             raise
         except Exception as err:
@@ -1103,23 +1429,26 @@ class OPNInterpreter:
 
 
 def main(argv: list[str]) -> int:
+    if len(argv) >= 1 and argv[0] == "-m":
+        return run_module_in_venv(argv[1:])
+
     parser = argparse.ArgumentParser(
         prog="opn2.py",
-        description="Interprete y compilador de OPN (.opn -> .py).",
+        description="Interprete, compilador y empaquetador de OPN BluePanda.",
     )
     parser.add_argument(
         "args",
         nargs="+",
-        help="Uso rapido: opn2.py archivo.opn | opn2.py run archivo.opn | opn2.py compile in.opn -o out.py",
+        help="Uso: opn2.py archivo.opn | opn2.py run archivo.opn | opn2.py compile in.opn -o out.py | opn2.py build app.opn -o dist/app",
     )
-    parser.add_argument("-o", "--output", help="Ruta de salida para compile")
+    parser.add_argument("-o", "--output", help="Ruta de salida para compile/build")
     ns = parser.parse_args(argv)
 
     if len(ns.args) == 1 and ns.args[0].endswith(".opn"):
         path = ns.args[0]
         try:
             with open(path, "r", encoding="utf-8") as f:
-                OPNInterpreter().run(f.read(), source_name=path)
+                OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(
                 "No se encontro el archivo .opn",
@@ -1143,7 +1472,7 @@ def main(argv: list[str]) -> int:
         path = ns.args[1]
         try:
             with open(path, "r", encoding="utf-8") as f:
-                OPNInterpreter().run(f.read(), source_name=path)
+                OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(
                 "No se encontro el archivo .opn",
@@ -1181,11 +1510,34 @@ def main(argv: list[str]) -> int:
         print(f"Compilado: {src} -> {out}")
         return 0
 
+    if cmd == "build":
+        if len(ns.args) < 2:
+            raise OPNError(
+                "Falta archivo .opn para build",
+                code="OPN4009",
+                phase="Build",
+                hint="Uso: opn2.py build app.opn -o dist/app",
+            )
+        src = ns.args[1]
+        try:
+            out = build_opn_binary(src, ns.output)
+        except FileNotFoundError as err:
+            raise OPNError(
+                "No se encontro el archivo fuente para build",
+                code="OPN4001",
+                phase="Build",
+                source_name=src,
+                hint="Verifica la ruta de entrada.",
+                details=str(err),
+            ) from err
+        print(f"Binario generado: {out}")
+        return 0
+
     raise OPNError(
         f"Comando no soportado: {cmd}",
         code="OPN4004",
         phase="CLI",
-        hint="Comandos validos: run, compile",
+        hint="Comandos validos: run, compile, build o -m",
     )
 
 

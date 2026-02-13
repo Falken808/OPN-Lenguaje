@@ -1,102 +1,56 @@
-﻿<p align="center">
-  <img src="https://cdn.simpleicons.org/python" width="70" />
-</p>
+﻿# OPN BluePanda
 
-<h1 align="center">OPN Script</h1>
-<p align="center"><b>Versión 0.1.0 Alpha</b></p>
+OPN BluePanda is a Python-backed language with a simple C/JS-like syntax and a stable CLI command: `opn`.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Version-0.1.0_Alpha-blue?style=for-the-badge&logo=github" />
-  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=githubactions" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" />
-</p>
+ES (optional): OPN BluePanda es un lenguaje sobre Python, con sintaxis simple y comando estable `opn`.
 
-<p align="center">
-  Lenguaje ligero, poderoso e intuitivo que corre sobre el ecosistema de Python.<br>
-  <i>Menos configuración, más creación.</i>
-</p>
+## Version
+- Current version: `0.1.2`
+- CLI command: `opn`
+- Runtime: OPN transpiles to Python, then executes on Python.
 
----
+## What is new in 0.1.2
+- Automatic project `.venv` management.
+- Just-in-time dependency install when `ModuleNotFoundError` appears.
+- Dependency tracking in `opn.json`.
+- Python module proxy via `opn -m ...`.
+- Portable binary build via `opn build ...`.
 
-## ⭐ ¿Por qué elegir OPN?
-
-| 🎓 Aprendices | ⚡ Prototipos | 💼 Profesionales |
-|---------------|--------------|-----------------|
-| Sintaxis clara basada en `{}` | Iteración rápida sin compilaciones pesadas | Acceso total a Python mediante transpilación |
-
----
-
-## 🪟 Instalación (Windows)
-
-1. Descarga el paquete **OPN Script**
-2. Ejecuta `instalar.bat`
-3. Usa `opn` desde tu terminal
-
+## Quick commands
 ```bash
-opn --version
-````
+opn app.opn
+opn run app.opn
+opn compile app.opn -o app.py
+opn -m pip install requests
+opn build app.opn -o dist/app
+```
 
----
+## Documentation map
+- Quickstart: `docs/quickstart.md`
+- Syntax: `docs/syntax.md`
+- CLI and Build: `docs/compiler_cli.md`
+- Performance: `docs/performance.md`
+- AI Prompt Template: `docs/ia_formulario.md`
 
-## 🚀 Inicio Rápido
+## Typical workflow
+1. Create `app.opn`.
+2. Run with `opn app.opn`.
+3. Let OPN install missing dependencies when needed.
+4. Review dependencies in `opn.json`.
+5. Build a portable binary with `opn build app.opn`.
 
-```javascript
-// hola.opn
-var saludo = "Hola Mundo";
-print(saludo);
-
-function sumar(a, b) {
-    return a + b;
+## Project metadata (`opn.json`)
+```json
+{
+  "name": "my-project",
+  "version": "0.1.2",
+  "dependencies": ["pygame", "requests"]
 }
 ```
 
-### Comandos CLI
+## Web docs
+- Root entry: `index.html`
+- Full web portal: `docs/html/index.html`
 
-| Acción            | Comando                                |
-| ----------------- | -------------------------------------- |
-| Ejecutar          | `opn archivo.opn`                      |
-| Compilar a Python | `opn compile archivo.opn -o salida.py` |
-| Modo Watch        | `opn watch archivo.opn`                |
-
----
-
-## 📚 Documentación
-
-* 📖 Referencia de Sintaxis
-* ⚡ Guía Quickstart
-* 🛠 CLI y Compilador
-* 📊 Rendimiento y Benchmarks
-
-> Disponible en la carpeta `/docs`
-
----
-
-## 🤖 Asistencia con IA
-
-Convierte tu IA en experta en OPN usando el formulario oficial:
-
-`/docs/ia_formulario.md`
-
----
-
-## 🌍 Ecosistema
-
-<p align="center">
-  <img src="https://cdn.simpleicons.org/github" width="40" />
-  &nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/visualstudiocode" width="40" />
-  &nbsp;&nbsp;
-  <img src="https://cdn.simpleicons.org/python" width="40" />
-</p>
-
-<p align="center">
-  Open Source • IDE Support • Python Core
-</p>
-
----
-
-# OPN Script
-
-### Haciendo el código simple de nuevo.
-
-
+## License
+MIT

@@ -1,61 +1,56 @@
-﻿# Inicio Rápido  OPN en 5 Minutos
+﻿# Quickstart - OPN BluePanda
 
- [Volver al README](../README.md)
+[Back to README](../README.md)
 
-Bienvenido a OPN. Aprende lo básico en 5 minutos.
+This guide gets you from zero to a working project in minutes.
 
----
+ES (optional): Esta guia te lleva de cero a un proyecto funcionando en minutos.
 
-##  Paso 1: Tu Primer Programa
+## Requirements
+- Python 3.10+
+- `opn` command available (or `python src/opn.py` fallback)
 
-Crea **hola.opn**:
-````opn
-print("¡Hola, OPN!");
-````
+## 1. Create your first file
+Create `hello.opn`:
 
-Ejecuta:
-````ash
-python opn2.py hola.opn
-````
+```opn
+var greeting = "Hello BluePanda";
+print(greeting);
+```
 
- **¡Felicidades!** Has ejecutado tu primer programa OPN.
+Run:
 
----
+```bash
+opn hello.opn
+```
 
-##  Paso 2: Variables
+## 2. Compile to Python
 
-Crea **variables.opn**:
-````opn
-var edad = 25;
-var nombre = "Carlos";
-var altura = 1.75;
+```bash
+opn compile hello.opn -o hello.py
+python hello.py
+```
 
-print("Nombre: " + nombre);
-print("Edad: " + edad);
-print("Altura: " + altura + " metros");
-````
+## 3. Install dependencies in project venv
 
-Ejecuta: python opn2.py variables.opn
+```bash
+opn -m pip install pygame
+```
 
----
+If a module is missing during execution, OPN can auto-install it and update `opn.json`.
 
-##  Paso 3: Funciones
+## 4. Build a portable binary
 
-````opn
-function suma(a, b) {
-    return a + b;
-}
+```bash
+opn build hello.opn -o dist/hello
+```
 
-print(suma(10, 20));
-````
+Output:
+- Windows: `dist/hello.exe`
+- Linux/macOS: `dist/hello`
 
----
-
-##  Más Información
-
-- [Sintaxis Completa](syntax.md)
-- [Rendimiento](performance.md)
-- [CLI](compiler_cli.md)
-- [Inicio](../index.html)
-
-**¡Listo para escribir código!** 
+## 5. Continue learning
+- Syntax reference: `docs/syntax.md`
+- CLI details: `docs/compiler_cli.md`
+- Performance checklist: `docs/performance.md`
+- AI workflow template: `docs/ia_formulario.md`

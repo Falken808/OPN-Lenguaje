@@ -1,67 +1,47 @@
-﻿# Optimización y Rendimiento OPN
+﻿# Performance Guide - OPN BluePanda
 
- [Volver al README](../README.md)
+[Back to README](../README.md)
 
-Guía sobre optimización y mejor rendimiento en OPN.
+Practical performance rules and profiling workflow.
 
----
+ES (optional): Reglas practicas de rendimiento y flujo de perfilado.
 
-##  Optimizaciones Integradas
+## Built-in runtime behavior
+- LRU cache for transpile/compile stages.
+- Interpreter reuse across repeated runs.
+- Final execution on Python runtime.
 
-- **Cache LRU** de transpilación automático
-- **Reutilización de intérprete** para múltiples ejecuciones
-- **Python nativo** (CPython performance)
+## Performance habits
+- Cache repeated values in loops.
+- Prefer dictionary lookups for key-based access.
+- Avoid heavy string concatenation in tight loops.
+- Profile first, optimize second.
 
----
+## Example pattern
+Better:
 
-##  Mejores Prácticas
-
-###  DO: Cachea valores
-````opn
-var len = lista.length;
-for (var i = 0; i < len; i = i + 1) {
-    // usar len, no lista.length
+```opn
+var n = items.length;
+for (var i = 0; i < n; i = i + 1) {
+    print(items[i]);
 }
-````
+```
 
-###  DON'T: Operaciones en bucles
-````opn
-for (var i = 0; i < lista.length; i = i + 1) {
-    // Evita calcular lista.length en cada iteración
-}
-````
+## Production check
+```bash
+opn compile app.opn -o app.py
+python -m cProfile -s cumtime app.py
+opn build app.opn -o dist/app
+```
 
-###  DO: Usa diccionarios para búsquedas
-Acceso O(1) en lugar de O(n)
+## Measurement workflow
+1. Define a test case.
+2. Measure baseline.
+3. Change one thing.
+4. Measure again.
+5. Keep only proven improvements.
 
-###  DON'T: Concatena strings en bucles
-Crea múltiples strings innecesarios
-
----
-
-##  Benchmarks
-
-- Suma 1-10000: ~1-2ms
-- Iteración 10k elementos: ~2-5ms
-- Creación 1000 objetos: ~5-10ms
-
-**Velocidad**: Tan rápido como Python puro.
-
----
-
-##  Compilación para Producción
-
-````ash
-python opn2.py compile programa.opn -o programa.py
-python programa.py
-````
-
----
-
-##  Más Información
-
-- [Sintaxis](syntax.md)
-- [Inicio Rápido](quickstart.md)
-- [CLI](compiler_cli.md)
-
-**Escribe código rápido con OPN** 
+## Related guides
+- Syntax: `docs/syntax.md`
+- CLI and build: `docs/compiler_cli.md`
+- AI workflow: `docs/ia_formulario.md`

@@ -1,62 +1,66 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Docs | Rendimiento</title>
-  <meta name="description" content="Optimizacion y buenas practicas de rendimiento en OPN." />
+  <title>OPN BluePanda Docs | Performance</title>
+  <meta name="description" content="Performance guide and optimization checklist for OPN BluePanda." />
   <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
-    <header class="topbar">
-      <div class="container topbar-inner">
-        <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" /><div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Guia de rendimiento</p></div></a>
-        <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
-        <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a></nav>
-      </div>
-    </header>
+    <header class="topbar"><div class="container topbar-inner">
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Performance guide</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Syntax</a><a href="performance.html" data-i18n="nav_perf">Performance</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html" data-i18n="nav_ai">AI</a></nav>
+    </div></header>
 
     <main class="page-main"><div class="container">
-      <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Performance guide</span><h1 class="page-title" data-i18n="title">Optimizacion y rendimiento OPN</h1><p class="page-intro" data-i18n="intro">Cache LRU, reutilizacion de interprete y practicas para compilar a Python en produccion.</p></article></section>
+      <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Performance</span><h1 class="page-title" data-i18n="title">Optimize with measurable steps</h1><p class="page-intro" data-i18n="intro">Use cache-aware patterns, compile when needed, and profile before making changes.</p></article></section>
 
       <section class="section section-grid grid-2">
-        <article class="card reveal"><h2 data-i18n="built_title">Optimizaciones integradas</h2><ul class="list-clean"><li data-i18n="built_1">Cache LRU para transpilacion OPN a Python.</li><li data-i18n="built_2">Reutilizacion de interprete para ejecuciones repetidas.</li><li data-i18n="built_3">Ejecucion final en CPython.</li></ul></article>
-        <article class="card reveal"><h2 data-i18n="meter_title">Indicadores estimados</h2>
-          <div class="progress"><div class="progress-label"><span data-i18n="m1">Suma 1-10000</span><strong>95%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="95"></div></div></div>
-          <div class="progress"><div class="progress-label"><span data-i18n="m2">Iteracion 10k</span><strong>90%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="90"></div></div></div>
-          <div class="progress"><div class="progress-label"><span data-i18n="m3">Creacion 1000 objetos</span><strong>84%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="84"></div></div></div>
+        <article class="card reveal"><h2 data-i18n="built_title">Built-in optimizations</h2><ul class="list-clean"><li data-i18n="built_1">LRU caching for transpilation and compile stages.</li><li data-i18n="built_2">Interpreter reuse across repeated runs.</li><li data-i18n="built_3">Runtime execution on Python.</li></ul></article>
+        <article class="card reveal"><h2 data-i18n="meter_title">Execution indicators</h2>
+          <div class="progress"><div class="progress-label"><span data-i18n="m1">Hot reload loop</span><strong>95%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="95"></div></div></div>
+          <div class="progress"><div class="progress-label"><span data-i18n="m2">Iteration throughput</span><strong>90%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="90"></div></div></div>
+          <div class="progress"><div class="progress-label"><span data-i18n="m3">Object creation</span><strong>84%</strong></div><div class="progress-track"><div class="progress-fill" data-progress="84"></div></div></div>
         </article>
       </section>
 
       <section class="section section-grid grid-2">
-        <article class="card reveal"><h2>DO</h2><pre id="p-code-1"><code>var len = lista.length;
-for (var i = 0; i < len; i = i + 1) {
-  // usar len cacheado
-}</code></pre><button class="btn-copy" data-copy-target="#p-code-1" data-i18n="copy">Copiar</button></article>
-        <article class="card reveal"><h2>DON'T</h2><pre id="p-code-2"><code>for (var i = 0; i < lista.length; i = i + 1) {
-  // evita evaluar lista.length cada vuelta
-}</code></pre><button class="btn-copy" data-copy-target="#p-code-2" data-i18n="copy">Copiar</button></article>
+        <article class="card reveal"><h2>DO</h2><pre id="p-code-1"><code>var n = items.length;
+for (var i = 0; i < n; i = i + 1) {
+  print(items[i]);
+}</code></pre><button class="btn-copy" data-copy-target="#p-code-1" data-i18n="copy">Copy</button></article>
+        <article class="card reveal"><h2>DON'T</h2><pre id="p-code-2"><code>for (var i = 0; i < items.length; i = i + 1) {
+  print(items[i]);
+}</code></pre><button class="btn-copy" data-copy-target="#p-code-2" data-i18n="copy">Copy</button></article>
       </section>
+
+      <section class="section card reveal"><h2 data-i18n="prod_title">Production checklist</h2><pre id="p-code-3"><code>opn compile app.opn -o app.py
+python -m cProfile -s cumtime app.py
+opn build app.opn -o dist/app</code></pre><button class="btn-copy" data-copy-target="#p-code-3" data-i18n="copy">Copy</button></section>
     </div></main>
 
-    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/performance.md.</div></footer>
+    <footer class="footer"><div class="container" data-i18n="footer">Source: docs/performance.md.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'Guia de rendimiento', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        kicker: 'Performance guide', title: 'Optimizacion y rendimiento OPN', intro: 'Cache LRU, reutilizacion de interprete y practicas para compilar a Python en produccion.',
-        built_title: 'Optimizaciones integradas', built_1: 'Cache LRU para transpilacion OPN a Python.', built_2: 'Reutilizacion de interprete para ejecuciones repetidas.', built_3: 'Ejecucion final en CPython.',
-        meter_title: 'Indicadores estimados', m1: 'Suma 1-10000', m2: 'Iteracion 10k', m3: 'Creacion 1000 objetos', copy: 'Copiar', footer: 'Fuente: docs/performance.md.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'Performance guide', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        kicker: 'Performance guide', title: 'OPN optimization and performance', intro: 'LRU cache, interpreter reuse and best practices for Python production builds.',
-        built_title: 'Built-in optimizations', built_1: 'LRU cache for OPN-to-Python transpilation.', built_2: 'Interpreter reuse across repeated runs.', built_3: 'Final execution on CPython.',
-        meter_title: 'Estimated indicators', m1: 'Sum 1-10000', m2: '10k iteration', m3: '1000 object creation', copy: 'Copy', footer: 'Source: docs/performance.md.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'Performance guide', menu_btn: 'Menu', nav_home: 'Home', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground', nav_ai: 'AI',
+        kicker: 'Performance', title: 'Optimize with measurable steps', intro: 'Use cache-aware patterns, compile when needed, and profile before making changes.',
+        built_title: 'Built-in optimizations', built_1: 'LRU caching for transpilation and compile stages.', built_2: 'Interpreter reuse across repeated runs.', built_3: 'Runtime execution on Python.',
+        meter_title: 'Execution indicators', m1: 'Hot reload loop', m2: 'Iteration throughput', m3: 'Object creation', prod_title: 'Production checklist', copy: 'Copy',
+        footer: 'Source: docs/performance.md.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'Guia de rendimiento', menu_btn: 'Menu', nav_home: 'Inicio', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground', nav_ai: 'IA',
+        kicker: 'Rendimiento', title: 'Optimiza con pasos medibles', intro: 'Usa patrones con cache, compila cuando convenga y perfila antes de cambiar codigo.',
+        built_title: 'Optimizaciones integradas', built_1: 'Cache LRU para transpilacion y compilacion.', built_2: 'Reuso del interprete en ejecuciones repetidas.', built_3: 'Ejecucion final sobre Python.',
+        meter_title: 'Indicadores de ejecucion', m1: 'Ciclo de desarrollo', m2: 'Rendimiento en iteraciones', m3: 'Creacion de objetos', prod_title: 'Checklist de produccion', copy: 'Copiar',
+        footer: 'Fuente: docs/performance.md.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

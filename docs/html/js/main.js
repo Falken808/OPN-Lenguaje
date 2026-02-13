@@ -28,7 +28,7 @@
   var langButtons = document.querySelectorAll('[data-lang-switch]');
 
   function setLanguage(lang) {
-    var chosen = i18n[lang] ? lang : 'es';
+    var chosen = i18n[lang] ? lang : 'en';
     localStorage.setItem('opn-lang', chosen);
     document.documentElement.lang = chosen;
 
@@ -65,7 +65,7 @@
     });
   });
 
-  var savedLang = localStorage.getItem('opn-lang') || document.documentElement.lang || 'es';
+  var savedLang = localStorage.getItem('opn-lang') || document.documentElement.lang || 'en';
   setLanguage(savedLang);
 
   document.querySelectorAll('[data-copy-target]').forEach(function (btn) {

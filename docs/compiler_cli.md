@@ -1,97 +1,69 @@
-﻿# CLI y Compilación OPN
+﻿# CLI and Build - OPN BluePanda
 
- [Volver al README](../README.md)
+[Back to README](../README.md)
 
-Herramientas de línea de comandos para OPN.
+Command reference for daily development and distribution.
 
----
+ES (optional): Referencia de comandos para desarrollo y distribucion.
 
-##  Comandos Básicos
+## Core commands
+- Run file: `opn app.opn`
+- Explicit run: `opn run app.opn`
+- Compile to Python: `opn compile app.opn -o app.py`
+- Run Python module in project venv: `opn -m pip install requests`
+- Build portable binary: `opn build app.opn -o dist/app`
 
-### Ejecutar un programa:
-````ash
-python opn2.py programa.opn
-````
+## Run and compile
+```bash
+opn app.opn
+opn compile app.opn -o app.py
+python app.py
+```
 
-### Ejecutar con modo explícito:
-````ash
-python opn2.py run programa.opn --verbose
-````
+## Venv module proxy (`-m`)
+```bash
+opn -m pip --version
+opn -m pip install pygame
+opn -m pip list
+```
 
-### Validar sintaxis:
-````ash
-python opn2.py check programa.opn
-````
+## Portable build
+`opn build` flow:
+1. Ensure `.venv` exists.
+2. Ensure `pip` exists in `.venv`.
+3. Ensure `pyinstaller` exists in `.venv`.
+4. Transpile `.opn` to temporary `.py`.
+5. Generate one-file binary into `dist/`.
 
----
+Examples:
 
-##  Compilación a Python
+```bash
+opn build game.opn
+opn build game.opn -o dist/game_final
+```
 
-### Compilar a archivo:
-````ash
-python opn2.py compile programa.opn -o programa.py
-python programa.py
-````
+Output:
+- Windows: `dist/game.exe`
+- Linux/macOS: `dist/game`
 
-### Ver código transpilado:
-````ash
-python opn2.py compile programa.opn --print
-````
+## Common errors
+- `OPN4001`: source file not found
+- `OPN4006`: failed to create `.venv`
+- `OPN4007`: `pip` unavailable in `.venv`
+- `OPN4009`: missing file for build command
+- `OPN4010`: build generation failed
+- `OPN4011`: failed to install PyInstaller
 
----
+## Project metadata file
+```json
+{
+  "name": "my-project",
+  "version": "0.1.2",
+  "dependencies": ["pygame", "requests"]
+}
+```
 
-##  Análisis
-
-### Ver estadísticas:
-````ash
-python opn2.py stats programa.opn
-````
-
-### Modo debug:
-````ash
-python opn2.py debug programa.opn
-````
-
----
-
-##  Opciones Avanzadas
-
-- --optimize: Optimiza código transpilado
-- --minify: Reduce tamaño del archivo
-- --python 3.8: Especifica versión Python
-
----
-
-##  Herramientas Interactivas
-
-### REPL (intérprete interactivo):
-````ash
-python opn2.py repl
-````
-
-### Watch mode (desarrollo):
-````ash
-python opn2.py watch programa.opn
-````
-
-Monitorea cambios y ejecuta automáticamente.
-
----
-
-##  Empaquetado
-
-Después de compilar, crea ejecutable:
-````ash
-pip install pyinstaller
-pyinstaller --onefile programa.py
-````
-
----
-
-##  Más Información
-
-- [Sintaxis](syntax.md)
-- [Inicio Rápido](quickstart.md)
-- [Rendimiento](performance.md)
-
-**¡Domina el CLI de OPN!** 
+## Related guides
+- Quickstart: `docs/quickstart.md`
+- Syntax: `docs/syntax.md`
+- Performance: `docs/performance.md`

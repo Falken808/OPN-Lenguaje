@@ -1,86 +1,87 @@
 ﻿<!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OPN Docs | Sintaxis</title>
-  <meta name="description" content="Referencia completa de sintaxis OPN." />
+  <title>OPN BluePanda Docs | Syntax</title>
+  <meta name="description" content="Syntax reference for OPN BluePanda." />
   <link rel="icon" type="image/svg+xml" href="assets/logo-opn.svg" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="site-shell">
-    <header class="topbar">
-      <div class="container topbar-inner">
-        <a class="brand" href="index.html">
-          <img class="brand-icon" src="assets/logo-opn.svg" alt="Logo OPN" />
-          <div><p class="brand-title">OPN Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Referencia de sintaxis</p></div>
-        </a>
-        <div class="topbar-actions">
-          <div class="lang-toggle"><button type="button" data-lang-switch="es">ES</button><button type="button" data-lang-switch="en">EN</button></div>
-          <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button>
-        </div>
-        <nav id="main-nav" class="nav" data-main-nav>
-          <a href="index.html" data-i18n="nav_home">Inicio</a><a href="quickstart.html">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Sintaxis</a><a href="performance.html" data-i18n="nav_perf">Rendimiento</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html">IA</a>
-        </nav>
-      </div>
-    </header>
+    <header class="topbar"><div class="container topbar-inner">
+      <a class="brand" href="index.html"><img class="brand-icon" src="assets/logo-opn.svg" alt="OPN logo" /><div><p class="brand-title">OPN BluePanda Docs</p><p class="brand-subtitle" data-i18n="brand_subtitle">Syntax reference</p></div></a>
+      <div class="topbar-actions"><div class="lang-toggle"><button type="button" data-lang-switch="en">EN</button><button type="button" data-lang-switch="es">ES</button></div><button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="main-nav" data-i18n="menu_btn">Menu</button></div>
+      <nav id="main-nav" class="nav" data-main-nav><a href="index.html" data-i18n="nav_home">Home</a><a href="quickstart.html" data-i18n="nav_quickstart">Quickstart</a><a href="syntax.html" data-i18n="nav_syntax">Syntax</a><a href="performance.html" data-i18n="nav_perf">Performance</a><a href="cli.html">CLI</a><a href="playground.html" data-i18n="nav_playground">Playground</a><a href="ia-form.html" data-i18n="nav_ai">AI</a></nav>
+    </div></header>
 
-    <main class="page-main">
-      <div class="container">
-        <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Referencia completa</span><h1 class="page-title" data-i18n="title">Sintaxis de OPN</h1><p class="page-intro" data-i18n="intro">Guia rapida de comentarios, tipos, control de flujo, funciones, clases y colecciones.</p></article></section>
+    <main class="page-main"><div class="container">
+      <section class="hero"><article class="panel hero-panel"><span class="kicker" data-i18n="kicker">Language reference</span><h1 class="page-title" data-i18n="title">Supported syntax in V0.1.2</h1><p class="page-intro" data-i18n="intro">This page describes what the parser supports today, with examples you can run directly.</p></article></section>
 
-        <section class="section section-grid grid-2">
-          <article class="card reveal"><h2 data-i18n="comments">Comentarios y variables</h2><pre id="s-code-1"><code>// Comentario simple
-/* Comentario multilinea */
-var nombre = "OPN";
-var edad = 25;
-var activo = true;
-var lista = [1, 2, 3];
-var mapa = {"a": 1};</code></pre><button class="btn-copy" data-copy-target="#s-code-1" data-i18n="copy">Copiar</button></article>
-          <article class="card reveal"><h2 data-i18n="ops">Operadores</h2><ul class="list-clean"><li data-i18n="ops_1">Aritmeticos: +, -, *, /, %</li><li data-i18n="ops_2">Comparacion: ==, !=, >, <, >=, <=</li><li data-i18n="ops_3">Logicos: &&, ||, !</li></ul></article>
-        </section>
+      <section class="section section-grid grid-2">
+        <article class="card reveal"><h2 data-i18n="vars">Variables and literals</h2><pre id="s-code-1"><code>var name = "Ana";
+var age = 25;
+var active = true;
+var items = [1, 2, 3];
+var profile = {"name": "Ana", "age": 25};</code></pre><button class="btn-copy" data-copy-target="#s-code-1" data-i18n="copy">Copy</button></article>
+        <article class="card reveal"><h2 data-i18n="ops">Operators</h2><ul class="list-clean"><li data-i18n="ops_1">Arithmetic: + - * / %</li><li data-i18n="ops_2">Comparison: == != < <= > >=</li><li data-i18n="ops_3">Logical: && || !</li></ul></article>
+      </section>
 
-        <section class="section section-grid grid-2">
-          <article class="card reveal"><h2 data-i18n="flow">Condicionales y bucles</h2><pre id="s-code-2"><code>if (edad < 18) {
-  print("Menor");
-} else if (edad < 65) {
-  print("Adulto");
+      <section class="section section-grid grid-2">
+        <article class="card reveal"><h2 data-i18n="flow">Control flow</h2><pre id="s-code-2"><code>if (age >= 18) {
+  print("Adult");
 } else {
-  print("Jubilado");
+  print("Minor");
 }
 
-for (var i = 0; i < 5; i = i + 1) {
+for (var i = 0; i < 3; i = i + 1) {
   print(i);
-}</code></pre><button class="btn-copy" data-copy-target="#s-code-2" data-i18n="copy">Copiar</button></article>
-          <article class="card reveal"><h2 data-i18n="funcs">Funciones y clases</h2><pre id="s-code-3"><code>function suma(a, b) {
-  return a + b;
 }
 
-class Persona {
-  function init(nombre) { this.nombre = nombre; }
-  function saludar() { return "Hola, " + this.nombre; }
-}</code></pre><button class="btn-copy" data-copy-target="#s-code-3" data-i18n="copy">Copiar</button></article>
-        </section>
-      </div>
-    </main>
+while (age > 0) {
+  age = age - 1;
+}</code></pre><button class="btn-copy" data-copy-target="#s-code-2" data-i18n="copy">Copy</button></article>
+        <article class="card reveal"><h2 data-i18n="functions">Functions, classes, imports</h2><pre id="s-code-3"><code>function sum(a, b) { return a + b; }
 
-    <footer class="footer"><div class="container" data-i18n="footer">Fuente: docs/syntax.md.</div></footer>
+class Person {
+  function init(name) { this.name = name; }
+}
+
+import pygame;
+from math import sqrt;</code></pre><button class="btn-copy" data-copy-target="#s-code-3" data-i18n="copy">Copy</button></article>
+      </section>
+
+      <section class="section card reveal">
+        <h2 data-i18n="notes_title">Notes</h2>
+        <ul class="list-clean">
+          <li data-i18n="note_1">Statements end with `;`.</li>
+          <li data-i18n="note_2">Use braces for code blocks.</li>
+          <li data-i18n="note_3">Some JavaScript-like features are intentionally not supported yet (for example `do...while`).</li>
+        </ul>
+      </section>
+    </div></main>
+
+    <footer class="footer"><div class="container" data-i18n="footer">Source: docs/syntax.md.</div></footer>
   </div>
 
   <script>
     window.OPN_I18N = {
-      es: {
-        brand_subtitle: 'Referencia de sintaxis', menu_btn: 'Menu', nav_home: 'Inicio', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground',
-        kicker: 'Referencia completa', title: 'Sintaxis de OPN', intro: 'Guia rapida de comentarios, tipos, control de flujo, funciones, clases y colecciones.',
-        comments: 'Comentarios y variables', ops: 'Operadores', ops_1: 'Aritmeticos: +, -, *, /, %', ops_2: 'Comparacion: ==, !=, >, <, >=, <=', ops_3: 'Logicos: &&, ||, !',
-        flow: 'Condicionales y bucles', funcs: 'Funciones y clases', copy: 'Copiar', footer: 'Fuente: docs/syntax.md.', copied: 'Copiado', copy_error: 'Error'
-      },
       en: {
-        brand_subtitle: 'Syntax reference', menu_btn: 'Menu', nav_home: 'Home', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground',
-        kicker: 'Complete reference', title: 'OPN syntax', intro: 'Fast guide to comments, types, flow control, functions, classes and collections.',
-        comments: 'Comments and variables', ops: 'Operators', ops_1: 'Arithmetic: +, -, *, /, %', ops_2: 'Comparison: ==, !=, >, <, >=, <=', ops_3: 'Logical: &&, ||, !',
-        flow: 'Conditionals and loops', funcs: 'Functions and classes', copy: 'Copy', footer: 'Source: docs/syntax.md.', copied: 'Copied', copy_error: 'Error'
+        brand_subtitle: 'Syntax reference', menu_btn: 'Menu', nav_home: 'Home', nav_quickstart: 'Quickstart', nav_syntax: 'Syntax', nav_perf: 'Performance', nav_playground: 'Playground', nav_ai: 'AI',
+        kicker: 'Language reference', title: 'Supported syntax in V0.1.2', intro: 'This page describes what the parser supports today, with examples you can run directly.',
+        vars: 'Variables and literals', ops: 'Operators', ops_1: 'Arithmetic: + - * / %', ops_2: 'Comparison: == != < <= > >=', ops_3: 'Logical: && || !',
+        flow: 'Control flow', functions: 'Functions, classes, imports', copy: 'Copy', notes_title: 'Notes',
+        note_1: 'Statements end with `;`.', note_2: 'Use braces for code blocks.', note_3: 'Some JavaScript-like features are intentionally not supported yet (for example `do...while`).',
+        footer: 'Source: docs/syntax.md.', copied: 'Copied', copy_error: 'Error'
+      },
+      es: {
+        brand_subtitle: 'Referencia de sintaxis', menu_btn: 'Menu', nav_home: 'Inicio', nav_quickstart: 'Inicio rapido', nav_syntax: 'Sintaxis', nav_perf: 'Rendimiento', nav_playground: 'Playground', nav_ai: 'IA',
+        kicker: 'Referencia del lenguaje', title: 'Sintaxis soportada en V0.1.2', intro: 'Esta pagina describe lo que el parser soporta hoy con ejemplos ejecutables.',
+        vars: 'Variables y literales', ops: 'Operadores', ops_1: 'Aritmeticos: + - * / %', ops_2: 'Comparacion: == != < <= > >=', ops_3: 'Logicos: && || !',
+        flow: 'Control de flujo', functions: 'Funciones, clases, imports', copy: 'Copiar', notes_title: 'Notas',
+        note_1: 'Las sentencias terminan con `;`.', note_2: 'Usa llaves para bloques de codigo.', note_3: 'Algunas features estilo JavaScript aun no estan soportadas (por ejemplo `do...while`).',
+        footer: 'Fuente: docs/syntax.md.', copied: 'Copiado', copy_error: 'Error'
       }
     };
   </script>

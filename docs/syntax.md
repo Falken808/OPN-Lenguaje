@@ -1,121 +1,79 @@
-﻿# Referencia de Sintaxis OPN
+﻿# Syntax Reference - OPN BluePanda
 
- [Volver al README](../README.md)
+[Back to README](../README.md)
 
-Guía completa de todas las características del lenguaje OPN.
+Authoritative syntax guide for version `0.1.2`.
 
----
+ES (optional): Guia de sintaxis oficial para la version `0.1.2`.
 
-##  Comentarios
+## Language rules
+- Statements end with `;`.
+- Blocks use `{ ... }`.
+- Comments use `//`.
 
-````opn
-// Comentario de una línea
+## Supported keywords
+- `var`, `function`, `func`, `class`
+- `if`, `else`, `while`, `for`, `return`
+- `true`, `false`, `null`, `this`
+- `import`, `from`, `as`
 
-/*
-  Comentario de múltiples líneas
-*/
-````
+## Variables and literals
+```opn
+var name = "Ana";
+var age = 25;
+var active = true;
+var list = [1, 2, 3];
+var map = {"name": "Ana", "age": 25};
+```
 
----
+## Operators
+- Arithmetic: `+ - * / %`
+- Comparison: `== != < <= > >=`
+- Logical: `&& || !`
 
-##  Variables y Tipos
-
-````opn
-var nombre = "OPN";           // String
-var edad = 25;                  // Number
-var activo = true;              // Boolean
-var lista = [1, 2, 3];          // Array
-var mapa = {"a": 1};          // Object
-````
-
----
-
-##  Operadores
-
-**Aritméticos:** +, -, *, /, %
-**Comparación:** ==, !=, >, <, >=, <=
-**Lógicos:** &&, ||, !
-
----
-
-##  Condicionales
-
-````opn
-if (edad < 18) {
-    print("Menor");
-} else if (edad < 65) {
-    print("Adulto");
+## Control flow
+```opn
+if (age >= 18) {
+    print("Adult");
 } else {
-    print("Jubilado");
+    print("Minor");
 }
-````
 
----
-
-##  Bucles
-
-````opn
-for (var i = 0; i < 5; i = i + 1) {
+for (var i = 0; i < 3; i = i + 1) {
     print(i);
 }
 
-var contador = 0;
-while (contador < 5) {
-    contador = contador + 1;
+while (age > 0) {
+    age = age - 1;
 }
-````
+```
 
----
-
-##  Funciones
-
-````opn
-function suma(a, b) {
+## Functions and classes
+```opn
+function sum(a, b) {
     return a + b;
 }
 
-func multiplicar(a, b) {
-    return a * b;
-}
-````
-
----
-
-##  Clases
-
-````opn
-class Persona {
-    function init(nombre) {
-        this.nombre = nombre;
-    }
-    
-    function saludar() {
-        return "Hola, " + this.nombre;
+class Person {
+    function init(name) {
+        this.name = name;
     }
 }
+```
 
-var p = new Persona("Ana");
-print(p.saludar());
-````
+## Imports
+```opn
+import pygame;
+from math import sqrt;
+from math import floor as floor_int;
+```
 
----
+## Known non-goals in current parser
+- `do...while`
+- `try/catch`
+- Additional JS-only grammar extensions
 
-##  Arrays y Diccionarios
-
-````opn
-var lista = [1, 2, 3, 4];
-var persona = {"nombre": "Ana", "edad": 28};
-
-print(lista[0]);
-print(persona["nombre"]);
-````
-
----
-
-##  Más Información
-
-- [Inicio Rápido](quickstart.md)
-- [Rendimiento](performance.md)
-- [CLI](compiler_cli.md)
-
-**para más ejemplos, consulta la documentación** 
+## Related guides
+- Quickstart: `docs/quickstart.md`
+- CLI and build: `docs/compiler_cli.md`
+- Performance: `docs/performance.md`

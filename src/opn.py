@@ -2,27 +2,37 @@ import argparse
 import sys
 import traceback
 
-from opn2 import OPNError, OPNInterpreter, compile_opn_file, print_opn_error
+from opn2 import (
+    OPNError,
+    OPNInterpreter,
+    build_opn_binary,
+    compile_opn_file,
+    print_opn_error,
+    run_module_in_venv,
+)
 
 
 def main(argv: list[str]) -> int:
+    if len(argv) >= 1 and argv[0] == "-m":
+        return run_module_in_venv(argv[1:])
+
     parser = argparse.ArgumentParser(
         prog="opn",
-        description="CLI de OPN: ejecutar o compilar archivos .opn",
+        description="CLI de OPN BluePanda: ejecutar, compilar o empaquetar .opn",
     )
     parser.add_argument(
         "args",
         nargs="+",
-        help="Uso: opn archivo.opn | opn run archivo.opn | opn compile in.opn -o out.py",
+        help="Uso: opn archivo.opn | opn run archivo.opn | opn compile in.opn -o out.py | opn build app.opn -o dist/app",
     )
-    parser.add_argument("-o", "--output", help="Ruta de salida para compile")
+    parser.add_argument("-o", "--output", help="Ruta de salida para compile/build")
     ns = parser.parse_args(argv)
 
     if len(ns.args) == 1 and ns.args[0].endswith(".opn"):
         path = ns.args[0]
         try:
             with open(path, "r", encoding="utf-8") as f:
-                OPNInterpreter().run(f.read(), source_name=path)
+                OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(
                 "No se encontro el archivo .opn",
@@ -46,7 +56,7 @@ def main(argv: list[str]) -> int:
         path = ns.args[1]
         try:
             with open(path, "r", encoding="utf-8") as f:
-                OPNInterpreter().run(f.read(), source_name=path)
+                OPNInterpreter().run(f.read(), source_name=path, source_path=path)
         except FileNotFoundError as err:
             raise OPNError(
                 "No se encontro el archivo .opn",
@@ -84,11 +94,34 @@ def main(argv: list[str]) -> int:
         print(f"Compilado: {src} -> {out}")
         return 0
 
+    if cmd == "build":
+        if len(ns.args) < 2:
+            raise OPNError(
+                "Falta archivo .opn para build",
+                code="OPN4009",
+                phase="Build",
+                hint="Uso: opn build app.opn -o dist/app",
+            )
+        src = ns.args[1]
+        try:
+            out = build_opn_binary(src, ns.output)
+        except FileNotFoundError as err:
+            raise OPNError(
+                "No se encontro el archivo fuente para build",
+                code="OPN4001",
+                phase="Build",
+                source_name=src,
+                hint="Verifica la ruta de entrada.",
+                details=str(err),
+            ) from err
+        print(f"Binario generado: {out}")
+        return 0
+
     raise OPNError(
         f"Comando no soportado: {cmd}",
         code="OPN4004",
         phase="CLI",
-        hint="Comandos validos: run, compile",
+        hint="Comandos validos: run, compile, build o -m",
     )
 
 
